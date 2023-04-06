@@ -1,4 +1,5 @@
-export interface IProjectDomainModel{
+export interface IUpdateProjectModel{
+    _id:string;
     name: string;
     dataExpiration: string;
     progress : string;

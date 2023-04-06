@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GetMemberUseCase } from 'src/application/usecases/member/get-member.usecase';
+import { UpdateMemberUseCase } from 'src/application/usecases/member/update-member.usecase';
+import { IUpdateMemberModel } from 'src/domain/interfaces/member/update-member.interface.domain';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +10,18 @@ import { GetMemberUseCase } from 'src/application/usecases/member/get-member.use
 export class AppComponent implements OnInit {
   title = 'gestion-de-seguimiento-de-tareas-y-proyectos';
 
-  constructor(private readonly useCase : GetMemberUseCase) {}
-
+  constructor(private readonly useCase : UpdateMemberUseCase) {}
+   member : IUpdateMemberModel  = {
+    _id:"642da9242f6328fd9dd4d5e1",
+    name: "cristia",
+    document: "559758664",
+    salary: 100,
+    role: "programador",
+    email: "updatiado@gmail.com",
+    password: "113223",
+  }
   ngOnInit(): void {
-    this.useCase.execute("642c52150e21254d600d77ce").subscribe((value) => {
+    this.useCase.execute(this.member).subscribe((value) => {
       console.log(value);
     });
   }
