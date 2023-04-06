@@ -28,6 +28,13 @@ import { GetTeamUseCase } from 'src/application/usecases/team/get-team.usecase';
 import { RegisterTeamUseCase } from 'src/application/usecases/team/register-team.usecase';
 import { UpdateTeamUseCase } from 'src/application/usecases/team/update-team.usecase';
 import { TeamService } from 'src/domain/services/team/team.service';
+import { AggregateTaskOfTeamUseCase } from 'src/application/usecases/team/aggregate-task-team.usecase';
+import { AggregateCollaborationOfTeamUseCase } from 'src/application/usecases/team/aggregate-collaboration-team.usecase';
+import { AggregateMemberOfTeamUseCase } from 'src/application/usecases/team/aggregate-member-team.usecase';
+import { TeamImplementationRepository } from './repositories/team/team-implementation.repository';
+import { ProjectImplementationRepository } from './repositories/project/project-implementation.repository';
+import { TaskImplementationRepository } from './repositories/task/task-implementation.repository';
+import { CollaborationImplementationRepository } from './repositories/collaboration/collaboration-implementation.repository';
 
 
 //collaborationconst 
@@ -145,27 +152,26 @@ export const deleteTeamUseCaseProvider = {
     deps: [TeamService],
 };
 
-const AggregateTaskOfTeamUseCaseFactory = (teamService: TeamService) => new DeleteTeamUseCase(teamService);
+const AggregateTaskOfTeamUseCaseFactory = (teamService: TeamService) => new AggregateTaskOfTeamUseCase(teamService);
 export const aggregateTaskOfTeamUseCaseProvider = {
     provide: UpdateTeamUseCase,
     useFactory: AggregateTaskOfTeamUseCaseFactory,
     deps: [TeamService],
 };
 
+const AggregateCollaborationOfTeamUseCaseFactory = (teamService: TeamService) => new AggregateCollaborationOfTeamUseCase(teamService);
+export const aggregateCollaborationOfTeamUseCaseProvider = {
+    provide: UpdateTeamUseCase,
+    useFactory: AggregateCollaborationOfTeamUseCaseFactory,
+    deps: [TeamService],
+};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+const AggregateMemberOfTeamUseCaseFactory = (teamService: TeamService) => new AggregateMemberOfTeamUseCase(teamService);
+export const aggregateMemberOfTeamUseCaseProvider = {
+    provide: UpdateTeamUseCase,
+    useFactory: AggregateMemberOfTeamUseCaseFactory,
+    deps: [TeamService],
+};
 
 //Member
 const SignInMemberUseCaseFactory = (memberService: MemberService) => new SingInMemberUseCase(memberService);
@@ -204,11 +210,45 @@ export const deleteMembernUseCaseProvider = {
 
 @NgModule({
     providers: [
+
+        //Member
         signInMemberUseCaseProvider,
         registerMemberUseCaseProvider,
         getMemberUseCaseProvider,
         updateMemberUseCaseProvider,
+        deleteMembernUseCaseProvider,
+
+        //Team
+        registerTeamUseCaseProvider,
+        getTeamUseCaseProvider,
+        updateTeamUseCaseProvider,
+        deleteTeamUseCaseProvider,
+        aggregateMemberOfTeamUseCaseProvider,
+        aggregateCollaborationOfTeamUseCaseProvider,
+        aggregateTaskOfTeamUseCaseProvider,
+
+        //Task
+        registerTaskUseCaseProvider,
+        getTaskUseCaseProvider,
+        updateTaskUseCaseProvider,
+        deleteTaskUseCaseProvider,
+        //Collaboration
+
+        registerCollaborationUseCaseProvider,
+        getCollaborationUseCaseProvider,
+        updateCollaborationUseCaseProvider,
+        deleteCollaborationUseCaseProvider,
+        
+        //Project
+        registerProjectUseCaseProvider,
+        getProjectUseCaseProvider,
+        updateProjectUseCaseProvider,
+        deleteProjectUseCaseProvider,
         { provide: MemberService, useClass: MemberImplementationRepository },
+        { provide: TeamService, useClass: TeamImplementationRepository },
+        { provide: ProjectService, useClass: ProjectImplementationRepository },
+        { provide: TaskService, useClass: TaskImplementationRepository },
+        { provide: CollaborationService, useClass: CollaborationImplementationRepository },
     ],
     imports: [
         CommonModule,
