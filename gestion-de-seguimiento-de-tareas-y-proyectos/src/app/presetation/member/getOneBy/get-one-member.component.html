@@ -1,0 +1,32 @@
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id </th>
+        <th scope="col">name</th>
+        <th scope="col">Document</th>
+        <th scope="col">Email</th>
+        <th scope="col">Password</th>
+        <th scope="col">salary</th>
+        <th scope="col">role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+          <td>{{member._id}}</td>
+          <td>{{member.name}}</td>
+          <td>{{member.document}}</td>
+          <td>{{member.email}}</td>
+          <td>{{member.password}}</td>
+          <td>{{member.salary}}</td>
+          <td>{{member.role}}</td>
+         
+          <td>
+            <a class = "btn btn-outline-success" (click)="update(member._id)" >Update</a>
+          </td>
+          <td>
+            <a class = "btn btn-outline-success" (click)="delete(member._id)" >Delete</a>
+          </td>
+      </tr>
+    </tbody>
+  </table>

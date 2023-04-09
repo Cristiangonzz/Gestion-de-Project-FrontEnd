@@ -1,0 +1,14 @@
+import { Observable } from 'rxjs';
+import { ICollaborationDomainModel } from 'src/app/domain/interfaces/collaboration/collaboration.interface.domain';
+import { IUpdateCollaborationModel } from 'src/app/domain/interfaces/collaboration/update-collaboration.interface.domain';
+import { CollaborationService } from 'src/app/domain/services/collaboration/collaboration.service';
+import { UseCase } from 'src/app/domain/use-case';
+
+export class UpdateCollaborationUseCase implements UseCase<IUpdateCollaborationModel, ICollaborationDomainModel> {
+
+    constructor(private collaborationService: CollaborationService) { }
+
+    execute(data :IUpdateCollaborationModel): Observable<ICollaborationDomainModel> {
+        return this.collaborationService.updateCollaboration(data);
+    }
+}

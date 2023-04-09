@@ -1,1 +1,38 @@
-<p>register-member works!</p>
+<div style="margin-left: 30%;">
+  <form (ngSubmit)="send()" [formGroup]="FormRegister" class="align-items-center"> 
+    <section>
+      <h1 style="margin: 15px;color:rgb(8, 82, 141);"> Register Member</h1>
+    </section>
+ 
+    <div class="col-md-6">
+      <app-input [control]="FormRegister.controls.name" type="text" label="Name" placeHolder="Pepe Mujica"></app-input>
+    </div>
+
+    <div class="col-md-6">
+      <app-input [control]="FormRegister.controls.document" type="text" label="Document" placeHolder="4656554"></app-input>
+    </div>
+
+    <div class="col-md-6">
+      <app-input [control]="FormRegister.controls.role" type="text" label="Role" placeHolder="Programador"></app-input>
+    </div>
+
+    <div class="col-md-6">
+      <app-input [control]="FormRegister.controls.salary" type="number" label="Salary" placeHolder="100"></app-input>
+    </div>
+
+    <div class="col-md-6">
+      <app-input [control]="FormRegister.controls.email" type="text" label="Email" placeHolder="ejemplo@gmail.com"></app-input>
+    </div>
+
+    <div class="col-md-6">
+      <app-input [control]="FormRegister.controls.password" type="text" label="Password" placeHolder=""></app-input>
+    </div>
+ 
+    <div class="col-12">
+      <button [disabled]="FormRegister.invalid"  class="btn btn-primary">Confirmar</button>
+      <button style="margin: 20px;" class="btn btn-dark" routerLink="">Cancelar</button>
+    </div>
+
+ 
+  </form>
+</div>

@@ -1,0 +1,11 @@
+<div class="contenedor">
+    <form class="d-flex" [formGroup]="form" role="search">
+        <form [formGroup]="typeForm">
+            <select id="type" formControlName="type">
+                <option *ngFor="let t of types" [ngValue]="t">{{ t }}</option>
+            </select>
+        </form>
+        <input class="form-control me-2"  formControlName="searchId"  type="search" placeholder="Search" aria-label="Search">
+        <button [disabled]="form.invalid" class="btn btn-outline-success" (click)="search()" type="submit">Search</button>
+    </form>
+</div>
