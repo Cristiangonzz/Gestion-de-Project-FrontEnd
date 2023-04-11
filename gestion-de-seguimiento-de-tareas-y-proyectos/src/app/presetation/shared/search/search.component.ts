@@ -46,21 +46,21 @@ export class SearchComponent implements OnInit{
 
     if(this.typeForm.get('type')?.value == 'Collaboration'){
       //Pasarle el id del customer para que te retorne la cuenta 
-      this.router.navigate([`account/customer/${this.form.get('searchId')?.value}`]);
+      this.router.navigate([`collaboration/listOne/${this.form.get('searchId')?.value}`]);
     }
 
     if(this.typeForm.get('type')?.value == 'Project'){
-      this.router.navigate([`customerByOneList/${this.form.get('searchId')?.value}`]);
+      this.router.navigate([`project/listOne/${this.form.get('searchId')?.value}`]);
     }
 
     if(this.typeForm.get('type')?.value == 'Task'){
       //Pasarle el id del customer para que te retorne la cuenta 
-      this.router.navigate([`account/customer/${this.form.get('searchId')?.value}`]);
+      this.router.navigate([`task/listOne/${this.form.get('searchId')?.value}`]);
     }
 
     if(this.typeForm.get('type')?.value == 'Team'){
       //Pasarle el id del customer para que te retorne la cuenta 
-      this.router.navigate([`account/customer/${this.form.get('searchId')?.value}`]);
+      this.router.navigate([`team/listOne/${this.form.get('searchId')?.value}`]);
     }
     
     

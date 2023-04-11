@@ -1,0 +1,21 @@
+<form style="margin-left: 30%;" [formGroup]="formLogin" >
+	<div >
+		<section >
+			<h1 style="margin: 15px;color:rgb(8, 82, 141);font-family:'Times New Roman', Times, serif;font-size: 25px;" > Sign In </h1>
+		</section>
+        <div class="col-md-6">
+            <app-input [control]="formLogin.controls.email" type="text" label="Email" placeHolder="ejemplo@gmail.com"></app-input>
+          </div>
+      
+          <div class="col-md-6">
+            <app-input [control]="formLogin.controls.password" type="text" label="Password" placeHolder=""></app-input>
+          </div>
+		<a routerLink="login/register"(click)="register()" style="margin: 10%;" >Sign Up</a>
+		<div class="col-12" style="top: 20px;">
+			<button type="submit" class="btn btn-primary" (click)="signIn()" style="width: 250px;"> Ingresar </button>
+		</div>
+		<button class="btn btn-info"  (click)="google()"> Sign in whith Google </button>
+	</div>
+
+
+</form>

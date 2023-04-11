@@ -1,1 +1,30 @@
-<p>list-one-task works!</p>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name </th>
+        <th scope="col">Description </th>
+        <th scope="col">DataExpiration</th>
+        <th scope="col">Progress</th>
+        <th scope="col">Priority</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+          <td>{{task.name}}</td>
+          <td>{{task.description}}</td>
+          <td>{{task.dataExpiration}}</td>
+          <td>{{task.progress}}</td>
+          <td>{{task.priority}}</td>
+          
+          <td>
+            <a class = "btn btn-outline-success" (click)="update()" >Update</a>
+          </td>
+          <td>
+            <a class = "btn btn-outline-success" (click)="delete()" >Delete</a>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+

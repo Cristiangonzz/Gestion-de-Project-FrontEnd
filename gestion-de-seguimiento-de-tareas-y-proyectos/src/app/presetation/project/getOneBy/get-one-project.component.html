@@ -1,1 +1,28 @@
-<p>get-one-project works!</p>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name </th>
+        <th scope="col">DataExpiration</th>
+        <th scope="col">Progress</th>
+        <th scope="col">Priority</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+          <td>{{project.name}}</td>
+          <td>{{project.dataExpiration}}</td>
+          <td>{{project.progress}}</td>
+          <td>{{project.priority}}</td>
+          
+          <td>
+            <a class = "btn btn-outline-success" (click)="update()" >Update</a>
+          </td>
+          <td>
+            <a class = "btn btn-outline-success" (click)="delete()" >Delete</a>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+

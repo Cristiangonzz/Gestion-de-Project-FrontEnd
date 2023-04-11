@@ -1,1 +1,33 @@
-<p>create-task works!</p>
+<div style="margin-left: 30%;">
+    <form (ngSubmit)="send()" [formGroup]="FormCreate" class="align-items-center"> 
+      <section>
+        <h1 style="margin: 15px;color:rgb(8, 82, 141);"> Register Task</h1>
+      </section>
+   
+      <div class="col-md-6">
+        <app-input [control]="FormCreate.controls.name" type="text" label="Name" placeHolder=""></app-input>
+      </div>
+  
+      <div class="col-md-6">
+        <app-input [control]="FormCreate.controls.dataExpiration" type="text" label="Data Expiration" placeHolder="00/00/0000"></app-input>
+      </div>
+      <div class="col-md-6">
+        <app-input [control]="FormCreate.controls.description" type="text" label="Description" placeHolder="00/00/0000"></app-input>
+      </div>
+  
+      <div class="col-md-6">
+        <app-input [control]="FormCreate.controls.progress" type="text" label="Progress" placeHolder=""></app-input>
+      </div>
+  
+      <div class="col-md-6">
+        <app-input [control]="FormCreate.controls.priority" type="text" label="Priority" placeHolder=""></app-input>
+      </div>
+
+      <div class="col-12">
+        <button [disabled]="FormCreate.invalid"  class="btn btn-primary">Confirmar</button>
+        <button style="margin: 20px;" class="btn btn-dark" routerLink="">Cancelar</button>
+      </div>
+  
+   
+    </form>
+  </div>

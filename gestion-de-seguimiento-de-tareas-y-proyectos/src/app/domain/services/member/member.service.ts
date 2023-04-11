@@ -3,13 +3,14 @@ import { IMemberDomainModel } from 'src/app/domain/interfaces/member/member.inte
 import { IUpdateMemberModel } from 'src/app/domain/interfaces/member/update-member.interface.domain';
 import { IRegisterMemberDomainModel } from '../../interfaces/member/register-member.interface.domain';
 import { Injectable } from '@angular/core';
+import { SignInModel } from '../../interfaces/member/singin.member.domain.interfaces';
 
 @Injectable({
     providedIn: 'root'
 })
 export abstract class MemberService {
     
-    abstract signIn(params: {email: string, password: string}): Observable<IMemberDomainModel>;
+    abstract signIn(params: SignInModel): Observable<string>;
     
     abstract register(params: IRegisterMemberDomainModel ): Observable<IMemberDomainModel>;
     

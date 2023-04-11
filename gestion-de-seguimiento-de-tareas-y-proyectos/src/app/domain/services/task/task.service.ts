@@ -2,7 +2,11 @@ import { Observable } from 'rxjs';
 
 import { ITaskDomainModel } from 'src/app/domain/interfaces/task/task.entity.domain';
 import { IUpdateTaskModel } from 'src/app/domain/interfaces/task/update-task.interface.domain';
+import { Injectable } from '@angular/core';
 
+@Injectable({
+    providedIn: 'root'
+})
 export abstract class TaskService {
   
     abstract deleteTask(data: string): Observable<boolean>;

@@ -6,17 +6,18 @@ import { ListAllProjectComponent } from './list/list-all-project.component';
 import { DeleteProjectComponent } from './delete/delete-project.component';
 import { GetOneProjectComponent } from './getOneBy/get-one-project.component';
 import { UpdateProjectComponent } from './update/update-project.component';
+import { PermissionGuard } from 'src/app/guards/permission.guard';
 
 const routes: Routes = [
   {
-    path:'project',
+    path:'',
     children: [
-      {path:`create`,component: CreateProjectComponent/*,canActivate: [ PermisoGuard ]*/},
-      {path:`listAll`,component: ListAllProjectComponent/*,canActivate: [ PermisoGuard ]*/},
-      {path:`delete`,component: DeleteProjectComponent/*,canActivate: [ PermisoGuard ]*/},
-      {path:`listOne`,component: GetOneProjectComponent/*,canActivate: [ PermisoGuard ]*/},
-      {path:`update`,component: UpdateProjectComponent/*,canActivate: [ PermisoGuard ]*/},
-      {path:`**`,redirectTo:'project/listAll'},
+      {path:`create`,component: CreateProjectComponent,canActivate: [ PermissionGuard ]},
+      {path:`listAll`,component: ListAllProjectComponent,canActivate: [ PermissionGuard ]},
+      {path:`delete`,component: DeleteProjectComponent,canActivate: [ PermissionGuard ]},
+      {path:`listOne/:id`,component: GetOneProjectComponent,canActivate: [ PermissionGuard ]},
+      {path:`update/:id`,component: UpdateProjectComponent,canActivate: [ PermissionGuard ]},
+      {path:`**`,redirectTo:'listOne/:id'},
       ]
   }
 ]

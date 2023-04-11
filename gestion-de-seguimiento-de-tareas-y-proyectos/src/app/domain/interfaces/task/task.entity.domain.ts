@@ -1,7 +1,7 @@
 export interface ITaskDomainModel{
-    name: string;
-    dataExpiration: string;
-    description: string;
-    progress : string;
-    priority: string; 
+    name: string | null;
+    dataExpiration: string | null;
+    description: string | null;
+    progress : string | null;
+    priority: string | null; 
 }

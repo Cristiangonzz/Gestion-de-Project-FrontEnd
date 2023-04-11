@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IMemberDomainModel } from 'src/app/domain/interfaces/member/member.interface.domain';
-import { MemberService } from 'src/app/domain/services/member/member.service';
+import { MemberImplementationRepository } from 'src/app/data/repositories/member/member-implementation.repository';
+import { SignInModel } from 'src/app/domain/interfaces/member/singin.member.domain.interfaces';
 import { UseCase } from 'src/app/domain/use-case';
 
 @Injectable({
     providedIn: 'root'
 })
-export class SingInMemberUseCase implements UseCase<{ email: string; password: string }, IMemberDomainModel> {
+export class SingInMemberUseCase implements UseCase<SignInModel, string> {
 
-    constructor(private memberService: MemberService) { }
+    constructor(private readonly memberService: MemberImplementationRepository) { }
 
-    execute(
-        params: { email: string, password: string },
-    ): Observable<IMemberDomainModel> {
+    execute(params: SignInModel): Observable<string> {
         return this.memberService.signIn(params);
     }
 }

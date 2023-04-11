@@ -5,7 +5,10 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './presetation/shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
-import { MemberModule } from './presetation/member/member.module';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { MemberModule } from './presetation/member/member.module';
     AppRoutingModule,
     HttpClientModule,
 
-    SharedModule,
+     provideFirebaseApp(() => initializeApp(environment.firebase)),
+     provideAuth(() => getAuth()),
+    
+
   ],
   providers: [],
   bootstrap: [AppComponent]

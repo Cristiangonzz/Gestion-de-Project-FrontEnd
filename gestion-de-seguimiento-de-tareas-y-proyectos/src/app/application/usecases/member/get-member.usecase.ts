@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
 import { UseCase } from 'src/app/domain/use-case';
 import { IMemberDomainModel } from 'src/app/domain/interfaces/member/member.interface.domain';
-import { Injectable } from '@angular/core';
 import { MemberImplementationRepository } from 'src/app/data/repositories/member/member-implementation.repository';
+import { Injectable } from '@angular/core';
 
 @Injectable({
     providedIn: 'root'

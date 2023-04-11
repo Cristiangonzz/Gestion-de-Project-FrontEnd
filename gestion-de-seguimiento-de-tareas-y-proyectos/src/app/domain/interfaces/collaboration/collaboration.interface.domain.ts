@@ -1,6 +1,6 @@
 export interface ICollaborationDomainModel {
-    comment: string;
-    notification: string;
-    progress: string;
-    performence: string;
+    comment: string | null;
+    notification: string | null;
+    progress: string | null;
+    performence: string | null;
 }

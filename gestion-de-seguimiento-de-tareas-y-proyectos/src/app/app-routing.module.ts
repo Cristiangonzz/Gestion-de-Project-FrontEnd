@@ -1,64 +1,64 @@
 import { NgModule } from '@angular/core';
 
 import { RouterModule, Routes } from '@angular/router';
-//import { PermisoGuard } from './guards/permiso.guard';
+import { PermissionGuard } from './guards/permission.guard';
 
 const routes: Routes = [
 
-  // {
-  //    path: 'inicio',
-  //    canActivate: [ PermisoGuard ],
-  //    loadChildren: () => import('./components/components.module')
-  //    .then( m => m.ComponentsModule )
-  // },
+  {
+     path: 'home',
+     canActivate: [ PermissionGuard ],
+     loadChildren: () => import('./presetation/home/home.module')
+     .then( m => m.HomeModule )
+  },
 
-  // {
-  //   path: '',
-  //   loadChildren: () => import('./login/login-module.module')
-  //   .then( m => m.LoginModule )
-  // },
+  {
+    path: 'login',
+    loadChildren: () => import('./presetation/login/login.module')
+    .then( m => m.LoginModule )
+  },
 
-   {
-     path: 'member',
-     //canActivate: [ PermisoGuard ],
-     loadChildren: () => import('./presetation/member/member.module')
-     .then( m => m.MemberModule )
-   },
- 
+  {
+    path: 'collaboration',
+    canActivate: [ PermissionGuard ],
+    loadChildren: () => import('./presetation/collaboration/collaboration.module')
+    .then( m => m.CollaborationModule )
+  },
+  {
+    path: 'member',
+    canActivate: [ PermissionGuard ],
+    loadChildren: () => import('./presetation/member/member.module')
+    .then( m => m.MemberModule )
+  },
 
-  // {
-  //   path: 'project',
-  //   //canActivate: [ PermisoGuard ],
-  //   loadChildren: () => import('./presetation/project/project.module')
-  //   .then( m => m.ProjectModule )
-  // },
-  // {
-  //   path: 'collaboration',
-  //   //canActivate: [ PermisoGuard ],
-  //   loadChildren: () => import('./presetation/collaboration/collaboration.module')
-  //   .then( m => m.CollaborationModule )
-  // },
-  // {
-  //   path: 'task',
-  //   //canActivate: [ PermisoGuard ],
-  //   loadChildren: () => import('./presetation/task/task.module')
-  //   .then( m => m.TaskModule )
-  // },
-  // {
-  //   path: 'team',
-  //   //canActivate: [ PermisoGuard ],
-  //   loadChildren: () => import('./presetation/team/team.module')
-  //   .then( m => m.TeamModule )
-  // },
+  {
+    path: 'project',
+    canActivate: [ PermissionGuard ],
+    loadChildren: () => import('./presetation/project/project.module')
+    .then( m => m.ProjectModule )
+  },
+  {
+    path: 'task',
+    canActivate: [ PermissionGuard ],
+    loadChildren: () => import('./presetation/task/task.module')
+    .then( m => m.TaskModule )
+  },
+  {
+    path: 'team',
+    canActivate: [ PermissionGuard ],
+    loadChildren: () => import('./presetation/team/team.module')
+    .then( m => m.TeamModule )
+  },
   {
     path: '',
-    redirectTo: '',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
-  // {
-  //   path:   '**' ,
-  //   redirectTo: '',
-  // },
+
+  {
+  path:   '**' ,
+  redirectTo: 'login',
+  },
 
   ];
 

@@ -1,9 +1,9 @@
 export interface IRegisterMemberDomainModel{
-    name: string | null;
-    document: string | null;
-    salary: number | null;
-    role: string | null;
+    name: string ;
+    document: string ;
+    salary: number ;
+    role: string ;
 
-    email:string | null;
-    password:string | null;
+    email:string ;
+    password:string ;
 }

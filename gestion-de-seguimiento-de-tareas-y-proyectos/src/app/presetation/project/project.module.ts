@@ -6,6 +6,10 @@ import { DeleteProjectComponent } from './delete/delete-project.component';
 import { GetOneProjectComponent } from './getOneBy/get-one-project.component';
 import { ListAllProjectComponent } from './list/list-all-project.component';
 import { UpdateProjectComponent } from './update/update-project.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -21,6 +25,11 @@ import { UpdateProjectComponent } from './update/update-project.component';
   ],
   imports: [
     CommonModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    SharedModule,
     RoutingProjectModule,
   ],
   exports: [

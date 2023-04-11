@@ -2,6 +2,6 @@
 
 export interface IAgregateMemberOfTeamModel{
     
-    team: string;
+    team: string ;
     member: string;
 }

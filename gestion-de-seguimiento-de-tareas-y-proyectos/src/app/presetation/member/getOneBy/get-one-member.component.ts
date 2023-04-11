@@ -3,10 +3,11 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DeleteMemberUseCase } from 'src/app/application/usecases/member/delete-member.usecase';
 import { GetMemberUseCase } from 'src/app/application/usecases/member/get-member.usecase';
 import { IMemberDomainModel } from 'src/app/domain/interfaces/member/member.interface.domain';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-get-one-member',
-  providers: [GetMemberUseCase],
+  providers: [GetMemberUseCase,DeleteMemberUseCase],
   templateUrl: './get-one-member.component.html',
   styleUrls: ['./get-one-member.component.css']
 })
@@ -45,16 +46,47 @@ export class GetOneMemberComponent implements OnInit {
 
   
   //Redirecciono a este componente si apreta click en editar
-  update(id : string){
-    this.router.navigate([`member/update/${id}`]);
-  }
-  delete(id : string){
-    console.log(id);
-    this.deleteUseCase.execute(id);
+  update(){
+    this.router.navigate([`member/update/${this.memberId}`]);
   }
 
-
-
-  
+  delete():void{ 
+    Swal.fire({
+      title: 'Are you delete?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+     
+          this.deleteUseCase.execute(this.memberId).subscribe(
+            (response) => {
+              Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+              this.router.navigate([`member/register`]);
+              console.log(response);
+            },
+            (error) => {
+              Swal.fire({
+              position: 'top-end',
+              icon: 'error',
+              title: 'not Delete',
+              showConfirmButton: false,
+              timer: 2500
+            })
+              console.log(error);
+            }
+          );
+      }
+    })
+    
+    
+  }
 
 }

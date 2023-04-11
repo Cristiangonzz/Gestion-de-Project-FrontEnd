@@ -5,6 +5,7 @@ import { MemberService } from 'src/app/domain/services/member/member.service';
 import { IMemberDomainModel } from 'src/app/domain/interfaces/member/member.interface.domain';
 import { IUpdateMemberModel } from 'src/app/domain/interfaces/member/update-member.interface.domain';
 import { IRegisterMemberDomainModel } from 'src/app/domain/interfaces/member/register-member.interface.domain';
+import { SignInModel } from 'src/app/domain/interfaces/member/singin.member.domain.interfaces';
 
 @Injectable({
     providedIn: 'root',
@@ -26,8 +27,8 @@ export class MemberImplementationRepository extends MemberService {
         })
     }
 
-    signIn(params: { email: string; password: string; }): Observable<IMemberDomainModel> {
-        return this.http.post<IMemberDomainModel>(`${this.URL}/member/signin`, {params},this.httpOptions);
+    signIn(params:SignInModel): Observable<string> {
+        return this.http.post(`${this.URL}/member/signIn`,params,{responseType: 'text'});
     }
     
     register(params:IRegisterMemberDomainModel): Observable<IMemberDomainModel> {
@@ -37,9 +38,11 @@ export class MemberImplementationRepository extends MemberService {
     deleteMember(data: string): Observable<boolean> {
         return this.http.delete<boolean>(`${this.URL}/member/delete/${data}`,this.httpOptions);
     }
+
     getMember(data: string): Observable<IMemberDomainModel> {
         return this.http.get<IMemberDomainModel>(`${this.URL}/member/get/${data}`,this.httpOptions);
     }
+    
     updateMember(entity: IUpdateMemberModel): Observable<IMemberDomainModel> {
         return this.http.put<IMemberDomainModel>(`${this.URL}/member/update/${entity._id}`,entity,this.httpOptions);
     }

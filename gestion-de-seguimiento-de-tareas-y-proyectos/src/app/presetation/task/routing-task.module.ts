@@ -6,17 +6,18 @@ import { ListAllTaskComponent } from './list/list-all-task.component';
 import { DeleteTaskComponent } from './delete/delete-task.component';
 import { ListOneTaskComponent } from './getOneBy/list-one-task.component';
 import { UpdateTaskComponent } from './update/update-task.component';
+import { PermissionGuard } from 'src/app/guards/permission.guard';
 
 const routes: Routes = [
   {
-    path:'task',
+    path:'',
     children: [
-      {path:`create`,component: CreateTaskComponent/*,canActivate: [ PermisoGuard ]*/},
-      {path:`listAll`,component: ListAllTaskComponent/*,canActivate: [ PermisoGuard ]*/},
-      {path:`delete`,component: DeleteTaskComponent/*,canActivate: [ PermisoGuard ]*/},
-      {path:`listOne`,component: ListOneTaskComponent/*,canActivate: [ PermisoGuard ]*/},
-      {path:`Update`,component: UpdateTaskComponent/*,canActivate: [ PermisoGuard ]*/},
-      {path:`**`,redirectTo:'task/listAll'},
+      {path:`create`,component: CreateTaskComponent,canActivate: [ PermissionGuard ]},
+      {path:`listAll`,component: ListAllTaskComponent,canActivate: [ PermissionGuard ]},
+      {path:`delete`,component: DeleteTaskComponent,canActivate: [ PermissionGuard ]},
+      {path:`listOne`,component: ListOneTaskComponent,canActivate: [ PermissionGuard ]},
+      {path:`Update`,component: UpdateTaskComponent,canActivate: [ PermissionGuard ]},
+      {path:`**`,redirectTo:'listAll'},
       ]
   }
 ]

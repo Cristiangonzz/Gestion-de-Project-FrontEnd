@@ -1,1 +1,32 @@
-<p>list-one-team works!</p>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name </th>
+        <th scope="col">member </th>
+        <th scope="col">task</th>
+        <th scope="col">project</th>
+        <th scope="col">collaboration</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+          <td>{{team.name}}</td>
+          <td>{{team.member}}</td>
+          <td>{{team.task}}</td>
+          <td>{{team.project}}</td>
+          <td>{{team.collaboration}}</td>
+          
+          <td>
+            <a class = "btn btn-outline-success" (click)="update()" >Update</a>
+          </td>
+          <td>
+            <a class = "btn btn-outline-success" (click)="delete()" >Delete</a>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+
+<app-aggregate teamId={{teamId}} ></app-aggregate>
+  

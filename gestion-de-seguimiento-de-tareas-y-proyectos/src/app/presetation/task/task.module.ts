@@ -6,6 +6,10 @@ import { DeleteTaskComponent } from './delete/delete-task.component';
 import { ListOneTaskComponent } from './getOneBy/list-one-task.component';
 import { ListAllTaskComponent } from './list/list-all-task.component';
 import { UpdateTaskComponent } from './update/update-task.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -20,7 +24,12 @@ import { UpdateTaskComponent } from './update/update-task.component';
   ],
   imports: [
     CommonModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     RoutingTaskModule,
+    SharedModule,
   ],
   exports: [
     CreateTaskComponent,
