@@ -4,13 +4,14 @@ import { ITeamDomainModel } from 'src/app/domain/interfaces/team/team.interface.
 import { IAgregateMemberOfTeamModel } from 'src/app/domain/interfaces/member/agregate-member-of-team.dto';
 import { Injectable } from '@angular/core';
 import { TeamImplementationRepository } from 'src/app/data/repositories/team/team-implementation.repository';
+import { TeamService } from 'src/app/domain/services/team/team.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AggregateMemberOfTeamUseCase implements UseCase<IAgregateMemberOfTeamModel,ITeamDomainModel> {
 
-    constructor(private teamService: TeamImplementationRepository) { }
+    constructor(private teamService: TeamService) { }
 
     execute(
         params: IAgregateMemberOfTeamModel): Observable<ITeamDomainModel> {

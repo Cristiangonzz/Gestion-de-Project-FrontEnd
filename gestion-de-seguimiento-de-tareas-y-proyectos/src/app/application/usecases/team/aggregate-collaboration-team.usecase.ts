@@ -11,7 +11,7 @@ import { TeamImplementationRepository } from 'src/app/data/repositories/team/tea
 })
 export class AggregateCollaborationOfTeamUseCase implements UseCase<IAgregateCollaborationOfTeamModel, ITeamDomainModel> {
 
-    constructor(private teamService: TeamImplementationRepository) { }
+    constructor(private teamService: TeamService) { }
 
     execute(
         params: IAgregateCollaborationOfTeamModel): Observable<ITeamDomainModel> {

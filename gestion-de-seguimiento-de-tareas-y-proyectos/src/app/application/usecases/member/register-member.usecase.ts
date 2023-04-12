@@ -4,15 +4,13 @@ import { MemberService } from 'src/app/domain/services/member/member.service';
 import { IMemberDomainModel } from 'src/app/domain/interfaces/member/member.interface.domain';
 import { IRegisterMemberDomainModel } from 'src/app/domain/interfaces/member/register-member.interface.domain';
 import { Injectable } from '@angular/core';
-import { MemberImplementationRepository } from 'src/app/data/repositories/member/member-implementation.repository';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'
 })
 export class RegisterMemberUseCase implements UseCase<IRegisterMemberDomainModel, IMemberDomainModel> {
   
-    constructor(private readonly memberService: MemberImplementationRepository) { }
+    constructor(private readonly memberService: MemberService) { }
 
     execute(
         params: IRegisterMemberDomainModel): Observable<IMemberDomainModel> {

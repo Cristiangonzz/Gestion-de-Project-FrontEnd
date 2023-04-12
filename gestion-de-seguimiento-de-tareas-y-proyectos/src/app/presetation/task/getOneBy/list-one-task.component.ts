@@ -1,24 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import { DeleteTaskUseCase } from 'src/app/application/usecases/task/delete-task.usecase';
-import { GetTaskUseCase } from 'src/app/application/usecases/task/get-task.usecase';
+import { useCaseProviders } from 'src/app/data/factory';
 import { ITaskDomainModel } from 'src/app/domain/interfaces/task/task.entity.domain';
+import { TaskService } from 'src/app/domain/services/task/task.service';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-one-task',
-  providers: [GetTaskUseCase, DeleteTaskUseCase],
   templateUrl: './list-one-task.component.html',
   styleUrls: ['./list-one-task.component.css']
 })
 export class ListOneTaskComponent implements OnInit {
+  factory = useCaseProviders;
 
   taskId: string = ""; 
   protected task!: ITaskDomainModel; //lo que me traiga la api desde mi servicio se lo tengo que igual a mi varaible task
   
   constructor(
-    private readonly getOneUseCase : GetTaskUseCase ,
-    private readonly deleteUseCase : DeleteTaskUseCase ,
+    private readonly taskService : TaskService ,
     private readonly route : ActivatedRoute,
     private router : Router){}
 
@@ -39,7 +38,7 @@ export class ListOneTaskComponent implements OnInit {
 
 //Ahora este id es el que tengo enviar al servicio para traer el task 
   getOnetask(id : string):void{
-    this.getOneUseCase.execute(id).subscribe(
+    this.factory.getTaskUseCaseProvider.useFactory(this.taskService).execute(id).subscribe(
       (data: ITaskDomainModel) => {this.task = data},
     )
   }
@@ -62,27 +61,32 @@ export class ListOneTaskComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
 
-          this.deleteUseCase.execute(this.taskId).subscribe(
-            (response) => {
-              Swal.fire(
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
-              )
-              this.router.navigate([`task/register`]);
-              console.log(response);
-            },
-            (error:Error) => {
-              Swal.fire({
-              position: 'top-end',
-              icon: 'error',
-              title: 'not Delete',
-              showConfirmButton: false,
-              timer: 2500
-            })
-              console.log(error);
-            }
-          );
+          this
+            .factory
+              .deleteTaskUseCaseProvider
+                .useFactory(this.taskService)
+                  .execute(this.taskId)
+                    .subscribe(
+                      (response) => {
+                        Swal.fire(
+                          'Deleted!',
+                          'Your file has been deleted.',
+                          'success'
+                        )
+                        this.router.navigate([`task/register`]);
+                        console.log(response);
+                      },
+                      (error:Error) => {
+                        Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'not Delete',
+                        showConfirmButton: false,
+                        timer: 2500
+                      })
+                        console.log(error);
+                      }
+                    );
       }
     })
     

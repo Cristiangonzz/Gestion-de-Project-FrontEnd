@@ -10,7 +10,7 @@ import { UseCase } from 'src/app/domain/use-case';
 })
 export class SingInMemberUseCase implements UseCase<SignInModel, string> {
 
-    constructor(private readonly memberService: MemberImplementationRepository) { }
+    constructor(private readonly memberService: MemberService) { }
 
     execute(params: SignInModel): Observable<string> {
         return this.memberService.signIn(params);

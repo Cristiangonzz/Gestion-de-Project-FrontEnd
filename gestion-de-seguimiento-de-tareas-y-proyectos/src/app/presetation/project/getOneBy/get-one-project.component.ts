@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { DeleteProjectUseCase } from 'src/app/application/usecases/proyect/delete-project.usecase';
 import { GetProjectUseCase } from 'src/app/application/usecases/proyect/get-project.usecase';
+import { useCaseProviders } from 'src/app/data/factory';
 import { IProjectDomainModel } from 'src/app/domain/interfaces/proyect/proyect.interface.domain';
+import { ProjectService } from 'src/app/domain/services/proyect/proyect.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,13 +14,14 @@ import Swal from 'sweetalert2';
   styleUrls: ['./get-one-project.component.css']
 })
 export class GetOneProjectComponent implements OnInit {
-
+  factory = useCaseProviders;
   projectId: string = ""; 
   protected project!: IProjectDomainModel; //lo que me traiga la api desde mi servicio se lo tengo que igual a mi varaible project
   
   constructor(
     private readonly getOneUseCase : GetProjectUseCase ,
     private readonly deleteUseCase : DeleteProjectUseCase ,
+    private readonly projectService : ProjectService,
     private readonly route : ActivatedRoute,
     private router : Router){}
 
@@ -62,27 +65,32 @@ export class GetOneProjectComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
 
-          this.deleteUseCase.execute(this.projectId).subscribe(
-            (response) => {
-              Swal.fire(
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
-              )
-              this.router.navigate([`project/register`]);
-              console.log(response);
-            },
-            (error:Error) => {
-              Swal.fire({
-              position: 'top-end',
-              icon: 'error',
-              title: 'not Delete',
-              showConfirmButton: false,
-              timer: 2500
-            })
-              console.log(error);
-            }
-          );
+          this
+            .factory
+              .deleteProjectUseCaseProvider
+                .useFactory(this.projectService)
+                  .execute(this.projectId)
+                    .subscribe(
+                      (response) => {
+                        Swal.fire(
+                          'Deleted!',
+                          'Your file has been deleted.',
+                          'success'
+                        )
+                        this.router.navigate([`project/register`]);
+                        console.log(response);
+                      },
+                      (error:Error) => {
+                        Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'not Delete',
+                        showConfirmButton: false,
+                        timer: 2500
+                      })
+                        console.log(error);
+                      }
+                    );
       }
     })
     

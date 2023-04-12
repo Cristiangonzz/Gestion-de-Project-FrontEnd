@@ -18,7 +18,7 @@ export class TeamImplementationRepository extends TeamService {
    
     
   
-    URL = "http://localhost:3000";
+    URL = "https://gestion-de-project-backend-production.up.railway.app";
 
     constructor(private http: HttpClient) {
         super();

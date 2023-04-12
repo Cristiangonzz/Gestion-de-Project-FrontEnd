@@ -10,7 +10,7 @@ import { TeamImplementationRepository } from 'src/app/data/repositories/team/tea
 })
 export class RegisterTeamUseCase implements UseCase<ITeamDomainModel, ITeamDomainModel> {
 
-    constructor(private teamService: TeamImplementationRepository) { }
+    constructor(private teamService: TeamService) { }
 
     execute(
         params: ITeamDomainModel): Observable<ITeamDomainModel> {

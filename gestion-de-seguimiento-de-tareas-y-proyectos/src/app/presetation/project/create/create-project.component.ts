@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RegisterProjectUseCase } from 'src/app/application/usecases/proyect/register-project.usecase';
+import { useCaseProviders } from 'src/app/data/factory';
 import { IProjectDomainModel } from 'src/app/domain/interfaces/proyect/proyect.interface.domain';
+import { ProjectService } from 'src/app/domain/services/proyect/proyect.service';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-project',
-  providers : [RegisterProjectUseCase],
   templateUrl: './create-project.component.html',
   styleUrls: ['./create-project.component.css']
 })
 export class CreateProjectComponent implements OnInit {
-
+  factory = useCaseProviders;
 
   FormCreate= new FormGroup ({
     name: new FormControl('',[Validators.required]),
@@ -30,7 +30,7 @@ export class CreateProjectComponent implements OnInit {
     }
     
   constructor(
-    private readonly registerUseCase: RegisterProjectUseCase,
+    private readonly projectService: ProjectService,
     private router : Router,
     ){}
 
@@ -42,16 +42,21 @@ export class CreateProjectComponent implements OnInit {
 
    send():void{
     this.project = this.FormCreate.getRawValue();
-    this.registerUseCase.execute(this.project).subscribe(
-      (response) => {
-        console.log(response);
-        this.succes();
-        this.router.navigate([`sign-in`]);
-      },
-      (error) => {
-        console.log(error);
-        this.error();
-      });
+    this
+      .factory
+        .registerProjectUseCaseProvider
+          .useFactory(this.projectService)  
+            .execute(this.project)
+              .subscribe(
+                (response) => {
+                  console.log(response);
+                  this.succes();
+                  this.router.navigate([`sign-in`]);
+                },
+                (error) => {
+                  console.log(error);
+                  this.error();
+                });
    }
 
    succes(){

@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { AggregateComponent } from './aggregate/aggregate.component';
+import { DataModule } from 'src/app/data/data.module';
 
 
 
@@ -24,6 +25,7 @@ import { AggregateComponent } from './aggregate/aggregate.component';
     AggregateComponent,
   ],
   imports: [
+    DataModule,
     CommonModule,
     RouterModule,
     FormsModule,

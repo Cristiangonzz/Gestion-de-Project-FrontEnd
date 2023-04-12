@@ -1,24 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { DeleteMemberUseCase } from 'src/app/application/usecases/member/delete-member.usecase';
-import { GetMemberUseCase } from 'src/app/application/usecases/member/get-member.usecase';
+import { useCaseProviders } from 'src/app/data/factory';
 import { IMemberDomainModel } from 'src/app/domain/interfaces/member/member.interface.domain';
+import { MemberService } from 'src/app/domain/services/member/member.service';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-get-one-member',
-  providers: [GetMemberUseCase,DeleteMemberUseCase],
   templateUrl: './get-one-member.component.html',
   styleUrls: ['./get-one-member.component.css']
 })
 export class GetOneMemberComponent implements OnInit {
-
+factory = useCaseProviders;
   memberId: string = ""; 
   protected member!: IMemberDomainModel; //lo que me traiga la api desde mi servicio se lo tengo que igual a mi varaible member
   
   constructor(
-    private readonly getOneUseCase : GetMemberUseCase ,
-    private readonly deleteUseCase : DeleteMemberUseCase ,
+    private readonly memberService : MemberService ,
     private readonly route : ActivatedRoute,
     private router : Router){}
 
@@ -39,7 +37,7 @@ export class GetOneMemberComponent implements OnInit {
 
 //Ahora este id es el que tengo enviar al servicio para traer el member 
   getOneMember(id : string):void{
-    this.getOneUseCase.execute(id).subscribe(
+    this.factory.getMemberUseCaseProvider.useFactory(this.memberService).execute(id).subscribe(
       (data: IMemberDomainModel) => {this.member = data},
     )
   }
@@ -61,28 +59,32 @@ export class GetOneMemberComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-     
-          this.deleteUseCase.execute(this.memberId).subscribe(
-            (response) => {
-              Swal.fire(
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
-              )
-              this.router.navigate([`member/register`]);
-              console.log(response);
-            },
-            (error) => {
-              Swal.fire({
-              position: 'top-end',
-              icon: 'error',
-              title: 'not Delete',
-              showConfirmButton: false,
-              timer: 2500
-            })
-              console.log(error);
-            }
-          );
+          this
+            .factory
+              .deleteMembernUseCaseProvider
+                .useFactory(this.memberService)
+                  .execute(this.memberId)
+                    .subscribe(
+                      (response) => {
+                        Swal.fire(
+                          'Deleted!',
+                          'Your file has been deleted.',
+                          'success'
+                        )
+                        this.router.navigate([`member/register`]);
+                        console.log(response);
+                      },
+                      (error) => {
+                        Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'not Delete',
+                        showConfirmButton: false,
+                        timer: 2500
+                      })
+                        console.log(error);
+                      }
+                    );
       }
     })
     

@@ -2,17 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterTeamUseCase } from 'src/app/application/usecases/team/register-team.usecase';
+import { useCaseProviders } from 'src/app/data/factory';
 import { ITeamDomainModel } from 'src/app/domain/interfaces/team/team.interface.domain';
+import { TeamService } from 'src/app/domain/services/team/team.service';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-team',
-  providers : [RegisterTeamUseCase],
   templateUrl: './create-team.component.html',
   styleUrls: ['./create-team.component.css']
 })
 export class CreateTeamComponent implements OnInit {
 
+  factory = useCaseProviders;
 
   FormCreate= new FormGroup ({
     name: new FormControl('',[Validators.required]),
@@ -30,7 +32,7 @@ export class CreateTeamComponent implements OnInit {
 
     
   constructor(
-    private readonly registerUseCase: RegisterTeamUseCase,
+    private teamService: TeamService,
     private router : Router,
     ){}
 
@@ -41,16 +43,21 @@ export class CreateTeamComponent implements OnInit {
    send():void{
     this.team.name = this.FormCreate.get('name')?.value;
     this.team.project = this.FormCreate.get('project')?.value;
-    this.registerUseCase.execute(this.team).subscribe(
-      (response) => {
-        console.log(response);
-        this.succes();
-       // this.router.navigate([`sign-in`]);
-      },
-      (error) => {
-        console.log(error);
-        this.error();
-      });
+    this
+      .factory
+        .registerTeamUseCaseProvider
+          .useFactory(this.teamService)
+            .execute(this.team)
+              .subscribe(
+                (response) => {
+                  console.log(response);
+                  this.succes();
+                // this.router.navigate([`sign-in`]);
+                },
+                (error) => {
+                  console.log(error);
+                  this.error();
+                });
    }
 
    succes(){

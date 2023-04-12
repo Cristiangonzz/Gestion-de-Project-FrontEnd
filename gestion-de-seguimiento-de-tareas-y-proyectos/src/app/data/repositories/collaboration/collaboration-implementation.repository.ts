@@ -10,7 +10,7 @@ import { IUpdateCollaborationModel } from 'src/app/domain/interfaces/collaborati
 })
 export class CollaborationImplementationRepository extends CollaborationService {
   
-    URL = "http://localhost:3000";
+    URL = "https://gestion-de-project-backend-production.up.railway.app";
 
     constructor(private http: HttpClient) {
         super();

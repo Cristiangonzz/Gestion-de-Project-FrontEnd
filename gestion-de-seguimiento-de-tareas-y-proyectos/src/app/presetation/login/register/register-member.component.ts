@@ -3,13 +3,14 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { SignUpFireBaseUseCase } from 'src/app/application/usecases/login-fire-base/register-fire-base.use-case';
 import { RegisterMemberUseCase } from 'src/app/application/usecases/member/register-member.usecase';
+import { useCaseProviders } from 'src/app/data/factory';
 import { IRegisterMemberDomainModel } from 'src/app/domain/interfaces/member/register-member.interface.domain';
 import { SignInModel } from 'src/app/domain/interfaces/member/singin.member.domain.interfaces';
+import { MemberService } from 'src/app/domain/services/member/member.service';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register-member',
-  providers: [RegisterMemberUseCase,SignUpFireBaseUseCase],
   templateUrl: './register-member.component.html',
   styleUrls: ['./register-member.component.css']
 })
@@ -36,20 +37,22 @@ export class RegisterMemberComponent implements OnInit {
     }
     memberfireBase : SignInModel = {} as SignInModel; 
   constructor(
-    private readonly registerUseCase: RegisterMemberUseCase,
+   // private readonly registerUseCase: registerMemberUseCaseProvider,
+    private readonly memberService: MemberService,
     private readonly signUpFireBaseUseCase: SignUpFireBaseUseCase,
     private router : Router,
     ){}
+    useCase = useCaseProviders;
 
   ngOnInit(): void {
    
   }
 
-  
-
-   send():void{
+  send():void{
+    
     this.member = this.FormRegister.getRawValue() as IRegisterMemberDomainModel;
-    this.registerUseCase.execute(this.member).subscribe(
+
+    this.useCase.registerMemberUseCaseProvider.useFactory(this.memberService).execute(this.member).subscribe(
       (response) => {
         console.log(response);
         this.succes();

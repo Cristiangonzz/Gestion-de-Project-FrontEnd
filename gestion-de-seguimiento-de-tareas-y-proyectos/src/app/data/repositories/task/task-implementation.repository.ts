@@ -10,7 +10,7 @@ import { IUpdateTaskModel } from 'src/app/domain/interfaces/task/update-task.int
 })
 export class TaskImplementationRepository extends TaskService {
   
-    URL = "http://localhost:3000";
+    URL = "https://gestion-de-project-backend-production.up.railway.app";
 
     constructor(private http: HttpClient) {
         super();

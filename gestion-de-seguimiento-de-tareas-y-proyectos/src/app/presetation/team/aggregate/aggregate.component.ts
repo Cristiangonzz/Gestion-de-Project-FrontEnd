@@ -4,18 +4,22 @@ import { Router } from '@angular/router';
 import { AggregateCollaborationOfTeamUseCase } from 'src/app/application/usecases/team/aggregate-collaboration-team.usecase';
 import { AggregateMemberOfTeamUseCase } from 'src/app/application/usecases/team/aggregate-member-team.usecase';
 import { AggregateTaskOfTeamUseCase } from 'src/app/application/usecases/team/aggregate-task-team.usecase';
+import { useCaseProviders } from 'src/app/data/factory';
 import { IAgregateCollaborationOfTeamModel } from 'src/app/domain/interfaces/collaboration/agregate-collaboration-of-team.dto';
 import { IAgregateMemberOfTeamModel } from 'src/app/domain/interfaces/member/agregate-member-of-team.dto';
 import { IAgregateTaskOfTeamModel } from 'src/app/domain/interfaces/task/agregate-task-of-team.dto';
+import { MemberService } from 'src/app/domain/services/member/member.service';
+import { TeamService } from 'src/app/domain/services/team/team.service';
 
 @Component({
   selector: 'app-aggregate',
-  providers: [AggregateCollaborationOfTeamUseCase, AggregateMemberOfTeamUseCase, AggregateTaskOfTeamUseCase],
   templateUrl: './aggregate.component.html',
   styleUrls: ['./aggregate.component.css']
 })
 export class AggregateComponent implements OnInit{
 
+  factory = useCaseProviders;
+  
   @Input() teamId!: string;
   types: string[] = ['Member', 'Collaboration', 'Task' ];
 
@@ -27,6 +31,7 @@ export class AggregateComponent implements OnInit{
     private readonly aggregateTaskUseCase : AggregateTaskOfTeamUseCase,
     private readonly aggregateCollaborationUseCase : AggregateCollaborationOfTeamUseCase,
     private readonly aggregateMemberUseCase : AggregateMemberOfTeamUseCase,
+    private readonly teamService : TeamService,
     private formBuilder : FormBuilder){}
 
     ngOnInit(): void {
@@ -57,11 +62,16 @@ export class AggregateComponent implements OnInit{
         member: this.form.get('searchId')?.value
       }
       console.log(member);
-     this.aggregateMemberUseCase.execute(member).subscribe(
-        (data) => {
-          console.log(data);
-        }
-     );
+     this
+      .factory
+        .aggregateMemberOfTeamUseCaseProvider
+          .useFactory(this.teamService)
+            .execute(member)
+              .subscribe(
+                (data) => {
+                console.log(data);
+                },
+              );
     }
 
     if(this.typeForm.get('type')?.value == 'Collaboration'){
@@ -69,7 +79,11 @@ export class AggregateComponent implements OnInit{
         team: this.teamId,
         collaboration: this.form.get('searchId')?.value
       }
-      this.aggregateCollaborationUseCase.execute(collaboration);
+      this
+        .factory
+          .aggregateCollaborationOfTeamUseCaseProvider
+            .useFactory(this.teamService)
+              .execute(collaboration);
     }
 
     if(this.typeForm.get('type')?.value == 'Task'){
@@ -77,7 +91,11 @@ export class AggregateComponent implements OnInit{
         team: this.teamId,
         task: this.form.get('searchId')?.value
       }
-      this.aggregateTaskUseCase.execute(task);
+      this
+        .factory
+          .aggregateTaskOfTeamUseCaseProvider
+            .useFactory(this.teamService)
+              .execute(task);
     }
 
     

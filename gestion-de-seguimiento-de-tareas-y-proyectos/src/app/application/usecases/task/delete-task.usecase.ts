@@ -9,7 +9,7 @@ import { TaskImplementationRepository } from 'src/app/data/repositories/task/tas
 })
 export class DeleteTaskUseCase implements UseCase<string, boolean> {
 
-    constructor(private taskService: TaskImplementationRepository) { }
+    constructor(private taskService: TaskService) { }
 
     execute(data : string): Observable<boolean> {
         return this.taskService.deleteTask(data);

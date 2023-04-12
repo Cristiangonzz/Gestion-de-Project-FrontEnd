@@ -9,7 +9,7 @@ import { TeamImplementationRepository } from 'src/app/data/repositories/team/tea
 })
 export class DeleteTeamUseCase implements UseCase<string, boolean> {
 
-    constructor(private teamService: TeamImplementationRepository) { }
+    constructor(private teamService: TeamService) { }
 
     execute(data : string): Observable<boolean> {
         return this.teamService.deleteTeam(data);

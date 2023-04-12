@@ -5,15 +5,17 @@ import {  SignInModel } from '../../../domain/interfaces/member/singin.member.do
 import { SignInFireBaseUseCase } from 'src/app/application/usecases/login-fire-base/sign-in-fire-base.use-case';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { useCaseProviders } from 'src/app/data/factory';
+import { MemberService } from 'src/app/domain/services/member/member.service';
 
 @Component({
   selector: 'app-sing-in-member',
-  providers: [SingInMemberUseCase,SignInFireBaseUseCase],
   templateUrl: './sing-in-member.component.html',
   styleUrls: ['./sing-in-member.component.css']
 })
 export class SingInMemberComponent {
-
+  useCase = useCaseProviders;
+  
   formLogin= new FormGroup ({
     email:new FormControl<string>('',[Validators.required,Validators.email]),
     password:new FormControl<string>('',[Validators.required,Validators.minLength(8)]),
@@ -23,21 +25,23 @@ export class SingInMemberComponent {
  
 
   constructor(
-    private readonly signInUseCase: SingInMemberUseCase,
+    private memberService: MemberService,
     private readonly signInFireBaseUseCase: SignInFireBaseUseCase,
     private readonly router : Router,
     ) {}
-
   signIn(){
     this.member = this.formLogin.getRawValue() as SignInModel ;
     this.signInFireBaseUseCase.execute(this.member);
     
-    this.signInUseCase.execute(this.member).subscribe({
-      next: (response: string) => {
-        localStorage.setItem('token', response);
-        this.succes();
-        this.router.navigate([`home`]);
-
+    this.useCase
+      .signInMemberUseCaseProvider
+        .useFactory(this.memberService)
+          .execute(this.member)
+            .subscribe({
+              next: (response: string) => {
+                localStorage.setItem('token', response);
+                this.succes();
+                this.router.navigate([`home`]);
       },
       error: (err: Error) => {
         this.error();

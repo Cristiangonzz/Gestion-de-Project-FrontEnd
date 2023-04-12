@@ -12,7 +12,7 @@ import { SignInModel } from 'src/app/domain/interfaces/member/singin.member.doma
 })
 export class MemberImplementationRepository extends MemberService {
   
-    URL = "http://localhost:3000";
+    URL = "https://gestion-de-project-backend-production.up.railway.app";
 
     constructor(private http: HttpClient) {
         super();

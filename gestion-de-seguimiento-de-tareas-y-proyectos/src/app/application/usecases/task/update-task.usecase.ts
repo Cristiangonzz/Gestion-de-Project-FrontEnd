@@ -11,7 +11,7 @@ import { TaskImplementationRepository } from 'src/app/data/repositories/task/tas
 })
 export class UpdateTaskUseCase implements UseCase<IUpdateTaskModel, ITaskDomainModel> {
 
-    constructor(private taskService: TaskImplementationRepository) { }
+    constructor(private taskService: TaskService) { }
 
     execute(data :IUpdateTaskModel): Observable<ITaskDomainModel> {
         return this.taskService.updateTask(data);

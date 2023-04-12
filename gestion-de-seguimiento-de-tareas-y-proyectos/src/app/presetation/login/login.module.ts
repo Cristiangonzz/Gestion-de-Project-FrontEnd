@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { RegisterMemberComponent } from './register/register-member.component';
 import { SingInMemberComponent } from './signIn/sing-in-member.component';
+import { DataModule } from 'src/app/data/data.module';
 
 
 
@@ -25,6 +26,8 @@ import { SingInMemberComponent } from './signIn/sing-in-member.component';
 
     RoutingLoginModule,
     SharedModule,
+    
+    DataModule,
 
   ],
   exports: [

@@ -2,17 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterTaskUseCase } from 'src/app/application/usecases/task/register-task.usecase';
+import { useCaseProviders } from 'src/app/data/factory';
 import { ITaskDomainModel } from 'src/app/domain/interfaces/task/task.entity.domain';
+import { TaskService } from 'src/app/domain/services/task/task.service';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-task',
-  providers : [RegisterTaskUseCase],
   templateUrl: './create-task.component.html',
   styleUrls: ['./create-task.component.css']
 })
 export class CreateTaskComponent implements OnInit {
-
+  factory = useCaseProviders;
 
   FormCreate= new FormGroup ({
     name: new FormControl('',[Validators.required]),
@@ -32,7 +33,7 @@ export class CreateTaskComponent implements OnInit {
     }
     
   constructor(
-    private readonly registerUseCase: RegisterTaskUseCase,
+    private readonly taskService: TaskService,
     private router : Router,
     ){}
 
@@ -44,16 +45,21 @@ export class CreateTaskComponent implements OnInit {
 
    send():void{
     this.task = this.FormCreate.getRawValue();
-    this.registerUseCase.execute(this.task).subscribe(
-      (response) => {
-        console.log(response);
-        this.succes();
-        this.router.navigate([`sign-in`]);
-      },
-      (error) => {
-        console.log(error);
-        this.error();
-      });
+    this
+      .factory
+        .registerTaskUseCaseProvider
+          .useFactory(this.taskService)
+            .execute(this.task)
+              .subscribe(
+                (response) => {
+                  console.log(response);
+                  this.succes();
+                  this.router.navigate([`sign-in`]);
+                },
+                (error) => {
+                  console.log(error);
+                  this.error();
+                });
    }
 
    succes(){

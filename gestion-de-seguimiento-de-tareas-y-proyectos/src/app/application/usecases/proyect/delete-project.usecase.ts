@@ -9,7 +9,7 @@ import { ProjectImplementationRepository } from 'src/app/data/repositories/proje
 })
 export class DeleteProjectUseCase implements UseCase<string, boolean> {
 
-    constructor(private projectService: ProjectImplementationRepository) { }
+    constructor(private projectService: ProjectService) { }
 
     execute(data : string): Observable<boolean> {
         return this.projectService.deleteProject(data);

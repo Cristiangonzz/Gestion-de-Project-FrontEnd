@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchComponent } from './search/search.component';
 import { InputComponent } from './input/input.component';
+import { DataModule } from 'src/app/data/data.module';
 
 
 
@@ -12,6 +13,7 @@ import { InputComponent } from './input/input.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    DataModule,
   ],
   exports: [ SearchComponent,InputComponent ]
 })

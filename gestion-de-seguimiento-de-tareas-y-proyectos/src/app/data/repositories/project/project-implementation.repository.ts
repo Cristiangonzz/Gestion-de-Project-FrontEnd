@@ -10,7 +10,7 @@ import { IUpdateProjectModel } from 'src/app/domain/interfaces/proyect/update-pr
 })
 export class ProjectImplementationRepository extends ProjectService {
   
-    URL = "http://localhost:3000";
+    URL = "https://gestion-de-project-backend-production.up.railway.app";
 
     constructor(private http: HttpClient) {
         super();

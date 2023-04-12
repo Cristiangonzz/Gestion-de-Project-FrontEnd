@@ -9,6 +9,7 @@ import { SharedModule } from '../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { DataModule } from 'src/app/data/data.module';
 
 
 
@@ -21,7 +22,7 @@ import { RouterModule } from '@angular/router';
 
   ],
   imports: [
-   
+    DataModule,
     CommonModule,
     RouterModule,
     FormsModule,

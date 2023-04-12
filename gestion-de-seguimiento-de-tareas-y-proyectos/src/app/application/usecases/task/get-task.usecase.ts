@@ -10,7 +10,7 @@ import { TaskImplementationRepository } from 'src/app/data/repositories/task/tas
 })
 export class GetTaskUseCase implements UseCase<string, ITaskDomainModel> {
 
-    constructor(private taskService: TaskImplementationRepository) { }
+    constructor(private taskService: TaskService) { }
 
     execute(data : string): Observable<ITaskDomainModel> {
         return this.taskService.getTask(data);

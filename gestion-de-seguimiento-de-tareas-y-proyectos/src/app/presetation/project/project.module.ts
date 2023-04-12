@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { DataModule } from 'src/app/data/data.module';
 
 
 
@@ -24,6 +25,7 @@ import { SharedModule } from '../shared/shared.module';
     
   ],
   imports: [
+    DataModule,
     CommonModule,
     RouterModule,
     FormsModule,
