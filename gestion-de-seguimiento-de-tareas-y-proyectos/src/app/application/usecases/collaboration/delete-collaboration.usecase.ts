@@ -9,7 +9,7 @@ import { CollaborationImplementationRepository } from 'src/app/data/repositories
 })
 export class DeleteCollaborationUseCase implements UseCase<string, boolean> {
 
-    constructor(private collaborationService: CollaborationImplementationRepository) { }
+    constructor(private collaborationService: CollaborationService) { }
 
     execute(data : string): Observable<boolean> {
         return this.collaborationService.deleteCollaboration(data);

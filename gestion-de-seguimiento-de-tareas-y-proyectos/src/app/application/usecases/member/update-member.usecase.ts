@@ -4,6 +4,7 @@ import { IMemberDomainModel } from 'src/app/domain/interfaces/member/member.inte
 import { IUpdateMemberModel } from 'src/app/domain/interfaces/member/update-member.interface.domain';
 import { MemberImplementationRepository } from 'src/app/data/repositories/member/member-implementation.repository';
 import { Injectable } from '@angular/core';
+import { MemberService } from 'src/app/domain/services/member/member.service';
 @Injectable({
     providedIn: 'root'
 })
@@ -11,7 +12,7 @@ export class UpdateMemberUseCase implements UseCase<IUpdateMemberModel, IMemberD
 
     //constructor(private memberService: MemberService) {}
     
-    constructor (private readonly  memberService: MemberImplementationRepository) {}
+    constructor (private readonly  memberService: MemberService) {}
 
     execute(data :IUpdateMemberModel): Observable<IMemberDomainModel> {
         return this.memberService.updateMember(data);

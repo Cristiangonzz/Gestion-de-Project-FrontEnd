@@ -10,7 +10,7 @@ import { CollaborationImplementationRepository } from 'src/app/data/repositories
 })
 export class GetCollaborationUseCase implements UseCase<string, ICollaborationDomainModel> {
 
-    constructor(private collaborationService: CollaborationImplementationRepository) { }
+    constructor(private collaborationService: CollaborationService) { }
 
     execute(data : string): Observable<ICollaborationDomainModel> {
         return this.collaborationService.getCollaboration(data);
