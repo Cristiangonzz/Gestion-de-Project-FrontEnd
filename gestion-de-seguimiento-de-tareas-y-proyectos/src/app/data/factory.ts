@@ -1,5 +1,4 @@
 import { GetMemberUseCase } from 'src/app/application/usecases/member/get-member.usecase';
-import { MemberImplementationRepository } from './repositories/member/member-implementation.repository';
 import { UpdateMemberUseCase } from 'src/app/application/usecases/member/update-member.usecase';
 import { RegisterCollaborationUseCase } from 'src/app/application/usecases/collaboration/register-collaboration.usecase';
 import { CollaborationService } from 'src/app/domain/services/collaboration/collaboration.service';
@@ -28,6 +27,7 @@ import { AggregateMemberOfTeamUseCase } from 'src/app/application/usecases/team/
 import { MemberService } from '../domain/services/member/member.service';
 import { SingInMemberUseCase } from '../application/usecases/member/sing-in-member.usecase';
 import { RegisterMemberUseCase } from '../application/usecases/member/register-member.usecase';
+import { HasUserUseCase } from '../application/usecases/login-fire-base/has-user.use-case';
 
 //collaborationconst 
 const RegisterCollaborationUseCaseFactory = (collaborationService: CollaborationService) => new RegisterCollaborationUseCase(collaborationService);
@@ -63,8 +63,16 @@ const UpdateMemberUseCaseFactory = (memberService: MemberService) => new UpdateM
 const DeleteMemberUseCaseFactory = (memberService: MemberService) => new DeleteMemberUseCase(memberService);
 const RegisterMemberUseCaseFactory = (memberService: MemberService) => new RegisterMemberUseCase(memberService);
 
+
+//Autentication
+const HasUserUseCaseFactory = () => new HasUserUseCase();
+
 export const useCaseProviders = {
 
+    hasUserUseCaseProvider : {
+        provide: HasUserUseCase,
+        useFactory: HasUserUseCaseFactory,
+    },
     registerMemberUseCaseProvider : 
     {
         provide: RegisterMemberUseCase,

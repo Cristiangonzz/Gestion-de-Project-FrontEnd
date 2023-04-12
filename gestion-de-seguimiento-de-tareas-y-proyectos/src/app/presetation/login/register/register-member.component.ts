@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SignUpFireBaseUseCase } from 'src/app/application/usecases/login-fire-base/register-fire-base.use-case';
 import { RegisterMemberUseCase } from 'src/app/application/usecases/member/register-member.usecase';
 import { useCaseProviders } from 'src/app/data/factory';
 import { IRegisterMemberDomainModel } from 'src/app/domain/interfaces/member/register-member.interface.domain';
@@ -16,6 +16,7 @@ import Swal from 'sweetalert2';
 })
 export class RegisterMemberComponent implements OnInit {
 
+  factory = useCaseProviders;
 
   FormRegister= new FormGroup ({
     name: new FormControl('',[Validators.required]),
@@ -39,10 +40,9 @@ export class RegisterMemberComponent implements OnInit {
   constructor(
    // private readonly registerUseCase: registerMemberUseCaseProvider,
     private readonly memberService: MemberService,
-    private readonly signUpFireBaseUseCase: SignUpFireBaseUseCase,
+    private auth : Auth,
     private router : Router,
     ){}
-    useCase = useCaseProviders;
 
   ngOnInit(): void {
    
@@ -51,21 +51,23 @@ export class RegisterMemberComponent implements OnInit {
   send():void{
     
     this.member = this.FormRegister.getRawValue() as IRegisterMemberDomainModel;
-
-    this.useCase.registerMemberUseCaseProvider.useFactory(this.memberService).execute(this.member).subscribe(
-      (response) => {
-        console.log(response);
-        this.succes();
-        this.router.navigate([`login/sign-in`]);
-      },
-      (error) => {
-        console.log(error);
-        this.error();
-      });
-
-      this.member.email = this.memberfireBase.email;
-      this.member.password = this.memberfireBase.password;
-      //this.signUpFireBaseUseCase.execute(this.memberfireBase);
+    this
+      .factory
+        .registerMemberUseCaseProvider
+          .useFactory(this.memberService)
+            .execute(this.member)
+              .subscribe(
+                (response) => {
+                  console.log(response);
+                  createUserWithEmailAndPassword(this.auth,this.member.email,this.member.password);
+                  this.succes();
+                  this.router.navigate([`login/sign-in`]);
+                },
+                (error) => {
+                  console.log(error);
+                  this.error();
+                });
+      
    }
 
    succes(){

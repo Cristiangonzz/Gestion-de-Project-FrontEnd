@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateTaskComponent } from './create/create-task.component';
 import { ListAllTaskComponent } from './list/list-all-task.component';
-import { DeleteTaskComponent } from './delete/delete-task.component';
 import { ListOneTaskComponent } from './getOneBy/list-one-task.component';
 import { UpdateTaskComponent } from './update/update-task.component';
 import { PermissionGuard } from 'src/app/guards/permission.guard';
@@ -14,7 +13,6 @@ const routes: Routes = [
     children: [
       {path:`create`,component: CreateTaskComponent,canActivate: [ PermissionGuard ]},
       {path:`listAll`,component: ListAllTaskComponent,canActivate: [ PermissionGuard ]},
-      {path:`delete`,component: DeleteTaskComponent,canActivate: [ PermissionGuard ]},
       {path:`listOne`,component: ListOneTaskComponent,canActivate: [ PermissionGuard ]},
       {path:`Update`,component: UpdateTaskComponent,canActivate: [ PermissionGuard ]},
       {path:`**`,redirectTo:'listAll'},

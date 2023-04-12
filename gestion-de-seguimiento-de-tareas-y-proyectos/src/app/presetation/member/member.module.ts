@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RoutingMemberModule } from './routing-member.module';
-import { RegisterMemberComponent } from '../login/register/register-member.component';
 import { ListAllMemberComponent } from './list/list-all-member.component';
 import { UpdateMemberComponent } from './update/update-member.component';
 import { HttpClientModule } from '@angular/common/http';

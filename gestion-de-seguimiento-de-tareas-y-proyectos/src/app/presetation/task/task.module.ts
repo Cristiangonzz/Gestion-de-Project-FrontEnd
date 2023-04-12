@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RoutingTaskModule } from './routing-task.module';
 import { CreateTaskComponent } from './create/create-task.component';
-import { DeleteTaskComponent } from './delete/delete-task.component';
 import { ListOneTaskComponent } from './getOneBy/list-one-task.component';
 import { ListAllTaskComponent } from './list/list-all-task.component';
 import { UpdateTaskComponent } from './update/update-task.component';
@@ -18,7 +17,6 @@ import { DataModule } from 'src/app/data/data.module';
   declarations: [
 
     CreateTaskComponent,
-    DeleteTaskComponent,
     ListOneTaskComponent,
     ListAllTaskComponent,
     UpdateTaskComponent,
@@ -35,7 +33,6 @@ import { DataModule } from 'src/app/data/data.module';
   ],
   exports: [
     CreateTaskComponent,
-    DeleteTaskComponent,
     ListOneTaskComponent,
     ListAllTaskComponent,
     UpdateTaskComponent,

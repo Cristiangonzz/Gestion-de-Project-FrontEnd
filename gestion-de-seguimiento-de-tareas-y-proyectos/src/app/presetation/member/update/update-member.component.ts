@@ -56,26 +56,26 @@ export class UpdateMemberComponent  implements OnInit {
   }
 
   send():void{
-  this.member.name = this.FormUpdate.get('name')?.value;
-  this.member.document = this.FormUpdate.get('document')?.value;
-  this.member.salary = this.FormUpdate.get('salary')?.value;
-  this.member.role = this.FormUpdate.get('role')?.value;
-  this.member.email = this.FormUpdate.get('email')?.value;
-  this.member.password = this.FormUpdate.get('password')?.value;
+    this.member.name = this.FormUpdate.get('name')?.value;
+    this.member.document = this.FormUpdate.get('document')?.value;
+    this.member.salary = this.FormUpdate.get('salary')?.value;
+    this.member.role = this.FormUpdate.get('role')?.value;
+    this.member.email = this.FormUpdate.get('email')?.value;
+    this.member.password = this.FormUpdate.get('password')?.value;
 
-  this
-    .factory
-      .updateMemberUseCaseProvider
-        .useFactory(this.memberService)
-          .execute(this.member)
-            .subscribe(
-              (response:IUpdateMemberModel) => {
-                this.succes();
-                console.log(response);
-              },
-              (error : Error) => {
-                this.error();
-                console.log(error);
+    this
+      .factory
+        .updateMemberUseCaseProvider
+          .useFactory(this.memberService)
+            .execute(this.member)
+              .subscribe(
+                (response:IUpdateMemberModel) => {
+                  this.succes();
+                  console.log(response);
+                },
+                (error : Error) => {
+                  this.error();
+                  console.log(error);
                 });
   }
 
