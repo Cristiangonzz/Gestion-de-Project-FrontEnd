@@ -12,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RegisterMemberUseCase implements UseCase<IRegisterMemberDomainModel, IMemberDomainModel> {
     //private memberService: MemberService;
-    constructor(public memberService: MemberService) { }
+    constructor(public memberService: MemberImplementationRepository) { }
     // constructor (private httpClient: HttpClient) {
     //     this.memberService = new MemberImplementationRepository(httpClient);
     //  }
