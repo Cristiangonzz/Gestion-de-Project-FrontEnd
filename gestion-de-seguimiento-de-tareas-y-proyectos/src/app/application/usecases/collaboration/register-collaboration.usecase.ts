@@ -11,7 +11,7 @@ import { CollaborationImplementationRepository } from 'src/app/data/repositories
 
 export class RegisterCollaborationUseCase implements UseCase<ICollaborationDomainModel, ICollaborationDomainModel> {
 
-    constructor(private collaborationService: CollaborationService) { }
+    constructor(private collaborationService: CollaborationImplementationRepository) { }
 
     execute(
         params: ICollaborationDomainModel): Observable<ICollaborationDomainModel> {

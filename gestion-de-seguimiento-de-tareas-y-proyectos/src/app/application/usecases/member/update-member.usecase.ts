@@ -12,7 +12,7 @@ export class UpdateMemberUseCase implements UseCase<IUpdateMemberModel, IMemberD
 
     //constructor(private memberService: MemberService) {}
     
-    constructor (private readonly  memberService: MemberService) {}
+    constructor (private readonly  memberService: MemberImplementationRepository) {}
 
     execute(data :IUpdateMemberModel): Observable<IMemberDomainModel> {
         return this.memberService.updateMember(data);

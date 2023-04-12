@@ -11,7 +11,7 @@ import { CollaborationImplementationRepository } from 'src/app/data/repositories
 })
 export class UpdateCollaborationUseCase implements UseCase<IUpdateCollaborationModel, ICollaborationDomainModel> {
 
-    constructor(private collaborationService: CollaborationService) { }
+    constructor(private collaborationService: CollaborationImplementationRepository) { }
 
     execute(data :IUpdateCollaborationModel): Observable<ICollaborationDomainModel> {
         return this.collaborationService.updateCollaboration(data);

@@ -10,7 +10,7 @@ import { ProjectImplementationRepository } from 'src/app/data/repositories/proje
 })
 export class RegisterProjectUseCase implements UseCase<IProjectDomainModel, IProjectDomainModel> {
 
-    constructor(private projectService: ProjectService) { }
+    constructor(private projectService: ProjectImplementationRepository) { }
 
     execute(
         params: IProjectDomainModel): Observable<IProjectDomainModel> {

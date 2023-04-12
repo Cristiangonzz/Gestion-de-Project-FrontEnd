@@ -8,7 +8,7 @@ import { MemberService } from '../../../domain/services/member/member.service';
 })
 export class DeleteMemberUseCase implements UseCase<string, boolean> {
 
-    constructor(private memberService: MemberService) { }
+    constructor(private memberService: MemberImplementationRepository) { }
 
     execute(data : string): Observable<boolean> {
         return this.memberService.deleteMember(data);

@@ -11,7 +11,7 @@ import { ProjectImplementationRepository } from 'src/app/data/repositories/proje
 })
 export class UpdateProjectUseCase implements UseCase<IUpdateProjectModel, IProjectDomainModel> {
 
-    constructor(private projectService: ProjectService) { }
+    constructor(private projectService: ProjectImplementationRepository) { }
 
     execute(data :IUpdateProjectModel): Observable<IProjectDomainModel> {
         return this.projectService.updateProject(data);

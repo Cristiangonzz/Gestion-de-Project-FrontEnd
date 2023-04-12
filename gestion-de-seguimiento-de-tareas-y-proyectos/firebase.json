@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/gestion-de-seguimiento-de-tareas-y-proyectos",
+    "public": "dist",
     "ignore": [
       "firebase.json",
       "**/.*",
