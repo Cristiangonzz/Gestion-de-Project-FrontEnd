@@ -5,7 +5,6 @@ import { ITeamDomainModel } from 'src/app/domain/interfaces/team/team.interface.
 import { IUpdateTeamModel } from 'src/app/domain/interfaces/team/update-team.interface.domain';
 import { TeamService } from 'src/app/domain/services/team/team.service';
 import { Injectable } from '@angular/core';
-import { TeamImplementationRepository } from 'src/app/data/repositories/team/team-implementation.repository';
 
 @Injectable({
     providedIn: 'root'

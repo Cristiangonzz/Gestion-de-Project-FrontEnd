@@ -21,7 +21,7 @@ export class UpdateTaskComponent implements OnInit {
     dataExpiration: new FormControl('',[Validators.required]),
     description: new FormControl('',[Validators.required]),
     progress:new FormControl('',[Validators.required]),
-    priority:new FormControl( '',[Validators.required]),
+    priority:new FormControl('',[Validators.required]),
   }); 
   
     task : IUpdateTaskModel = {} as IUpdateTaskModel ;
@@ -63,7 +63,7 @@ export class UpdateTaskComponent implements OnInit {
               .subscribe(
                 (response:ITaskDomainModel) => {
                   this.succes();
-                  this.router.navigate([`project/listOne/${this.task._id}`]);
+                  this.router.navigate([`task/listOne/${this.task._id}`]);
                   console.log(response);
                 },
                 (error : Error) => {
