@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { SingInMemberUseCase } from 'src/app/application/usecases/member/sing-in-member.usecase';
 import {  SignInModel } from '../../../domain/interfaces/member/singin.member.domain.interfaces';
-import { SignInFireBaseUseCase } from 'src/app/application/usecases/login-fire-base/sign-in-fire-base.use-case';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { useCaseProviders } from 'src/app/data/factory';
 import { MemberService } from 'src/app/domain/services/member/member.service';
+import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-sing-in-member',
@@ -14,7 +13,7 @@ import { MemberService } from 'src/app/domain/services/member/member.service';
   styleUrls: ['./sing-in-member.component.css']
 })
 export class SingInMemberComponent {
-  useCase = useCaseProviders;
+  factory = useCaseProviders;
   
   formLogin= new FormGroup ({
     email:new FormControl<string>('',[Validators.required,Validators.email]),
@@ -26,14 +25,15 @@ export class SingInMemberComponent {
 
   constructor(
     private memberService: MemberService,
-    private readonly signInFireBaseUseCase: SignInFireBaseUseCase,
     private readonly router : Router,
+    private readonly auth: Auth,
     ) {}
   signIn(){
     this.member = this.formLogin.getRawValue() as SignInModel ;
-    this.signInFireBaseUseCase.execute(this.member);
+
+    signInWithEmailAndPassword(this.auth,this.member.email,this.member.password);
     
-    this.useCase
+    this.factory
       .signInMemberUseCaseProvider
         .useFactory(this.memberService)
           .execute(this.member)

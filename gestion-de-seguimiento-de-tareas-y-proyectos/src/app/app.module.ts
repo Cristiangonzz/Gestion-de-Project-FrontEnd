@@ -8,6 +8,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DataModule } from './data/data.module';
 
 
 @NgModule({
@@ -19,9 +21,12 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    SharedModule,
+    DataModule,
 
      provideFirebaseApp(() => initializeApp(environment.firebase)),
      provideAuth(() => getAuth()),
+     BrowserAnimationsModule,
     
 
   ],

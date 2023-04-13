@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { RouterModule, Routes } from '@angular/router';
 import { PermissionGuard } from './guards/permission.guard';
+import { BackGuard } from './guards/back.guard';
 
 const routes: Routes = [
 
@@ -14,6 +15,7 @@ const routes: Routes = [
 
   {
     path: 'login',
+    canActivate: [ BackGuard],
     loadChildren: () => import('./presetation/login/login.module')
     .then( m => m.LoginModule )
   },

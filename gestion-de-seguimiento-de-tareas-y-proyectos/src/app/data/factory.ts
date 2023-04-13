@@ -63,7 +63,6 @@ const UpdateMemberUseCaseFactory = (memberService: MemberService) => new UpdateM
 const DeleteMemberUseCaseFactory = (memberService: MemberService) => new DeleteMemberUseCase(memberService);
 const RegisterMemberUseCaseFactory = (memberService: MemberService) => new RegisterMemberUseCase(memberService);
 
-
 //Autentication
 const HasUserUseCaseFactory = () => new HasUserUseCase();
 
