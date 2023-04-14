@@ -2,7 +2,6 @@ import { Observable } from 'rxjs';
 import { UseCase } from 'src/app/domain/use-case';
 import { ProjectService } from 'src/app/domain/services/proyect/proyect.service';
 import { Injectable } from '@angular/core';
-import { ProjectImplementationRepository } from 'src/app/data/repositories/project/project-implementation.repository';
 
 @Injectable({
     providedIn: 'root'

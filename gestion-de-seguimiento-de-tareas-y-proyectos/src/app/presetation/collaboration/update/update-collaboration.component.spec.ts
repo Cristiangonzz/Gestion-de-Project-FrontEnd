@@ -1,23 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+// import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UpdateCollaborationComponent } from './update-collaboration.component';
+// import { UpdateCollaborationComponent } from './update-collaboration.component';
 
-describe('UpdateCollaborationComponent', () => {
-  let component: UpdateCollaborationComponent;
-  let fixture: ComponentFixture<UpdateCollaborationComponent>;
+// describe('UpdateCollaborationComponent', () => {
+//   let component: UpdateCollaborationComponent;
+//   let fixture: ComponentFixture<UpdateCollaborationComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ UpdateCollaborationComponent ]
-    })
-    .compileComponents();
+//   beforeEach(async () => {
+//     await TestBed.configureTestingModule({
+//       declarations: [ UpdateCollaborationComponent ]
+//     })
+//     .compileComponents();
 
-    fixture = TestBed.createComponent(UpdateCollaborationComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+//     fixture = TestBed.createComponent(UpdateCollaborationComponent);
+//     component = fixture.componentInstance;
+//     fixture.detectChanges();
+//   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });

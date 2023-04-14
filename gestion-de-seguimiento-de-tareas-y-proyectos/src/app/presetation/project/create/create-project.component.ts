@@ -41,7 +41,7 @@ export class CreateProjectComponent implements OnInit {
   
 
    send():void{
-    this.project = this.FormCreate.getRawValue();
+    this.project = this.FormCreate.getRawValue() as IProjectDomainModel;
     this
       .factory
         .registerProjectUseCaseProvider

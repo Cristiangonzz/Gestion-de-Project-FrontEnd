@@ -4,7 +4,6 @@ import { IProjectDomainModel } from 'src/app/domain/interfaces/proyect/proyect.i
 import { IUpdateProjectModel } from 'src/app/domain/interfaces/proyect/update-proyect.interface.domain';
 import { ProjectService } from 'src/app/domain/services/proyect/proyect.service';
 import { Injectable } from '@angular/core';
-import { ProjectImplementationRepository } from 'src/app/data/repositories/project/project-implementation.repository';
 
 @Injectable({
     providedIn: 'root'

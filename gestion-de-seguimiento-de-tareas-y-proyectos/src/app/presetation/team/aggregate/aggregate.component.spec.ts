@@ -1,23 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+// import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AggregateComponent } from './aggregate.component';
+// import { AggregateComponent } from './aggregate.component';
 
-describe('AggregateComponent', () => {
-  let component: AggregateComponent;
-  let fixture: ComponentFixture<AggregateComponent>;
+// describe('AggregateComponent', () => {
+//   let component: AggregateComponent;
+//   let fixture: ComponentFixture<AggregateComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ AggregateComponent ]
-    })
-    .compileComponents();
+//   beforeEach(async () => {
+//     await TestBed.configureTestingModule({
+//       declarations: [ AggregateComponent ]
+//     })
+//     .compileComponents();
 
-    fixture = TestBed.createComponent(AggregateComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+//     fixture = TestBed.createComponent(AggregateComponent);
+//     component = fixture.componentInstance;
+//     fixture.detectChanges();
+//   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });

@@ -37,6 +37,7 @@ export class SingInMemberComponent {
     private readonly router : Router,
     private readonly auth: Auth,
     ) {}
+    
   signIn(){
     this.member = this.formLogin.getRawValue() as SignInModel ;
     this.factory.signInFireBaseUseCasepProvaider.useFactory(this.auth).execute(this.member);
@@ -99,14 +100,6 @@ export class SingInMemberComponent {
     
 }
 
- 
-
-  getMember():boolean{
-    if(this.factory.getEmailMemberUseCaseProvider.useFactory(this.memberService).execute(this.member.email)){
-      return true;
-    }
-    return false;
-  }
 
   register(){
     this.router.navigate([`login/register`]);

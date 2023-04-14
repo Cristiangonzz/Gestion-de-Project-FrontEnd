@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RegisterTaskUseCase } from 'src/app/application/usecases/task/register-task.usecase';
 import { useCaseProviders } from 'src/app/data/factory';
 import { ITaskDomainModel } from 'src/app/domain/interfaces/task/task.entity.domain';
 import { TaskService } from 'src/app/domain/services/task/task.service';
@@ -44,7 +43,7 @@ export class CreateTaskComponent implements OnInit {
   
 
    send():void{
-    this.task = this.FormCreate.getRawValue();
+    this.task = this.FormCreate.getRawValue() as ITaskDomainModel;
     this
       .factory
         .registerTaskUseCaseProvider

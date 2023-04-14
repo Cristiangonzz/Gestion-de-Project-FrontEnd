@@ -70,12 +70,12 @@ export class UpdateMemberComponent  implements OnInit {
   }
 
   send():void{
-    this.member.name = this.FormUpdate.get('name')?.value;
-    this.member.document = this.FormUpdate.get('document')?.value;
-    this.member.salary = this.FormUpdate.get('salary')?.value;
-    this.member.role = this.FormUpdate.get('role')?.value;
-    this.member.email = this.FormUpdate.get('email')?.value;
-    this.member.password = this.FormUpdate.get('password')?.value;
+    this.member.name = this.FormUpdate.get('name')?.value as string;
+    this.member.document = this.FormUpdate.get('document')?.value as string ;
+    this.member.salary = this.FormUpdate.get('salary')?.value as number ;
+    this.member.role = this.FormUpdate.get('role')?.value as string ;
+    this.member.email = this.FormUpdate.get('email')?.value as string ;
+    this.member.password = this.FormUpdate.get('password')?.value as string ;
 
     this
       .factory

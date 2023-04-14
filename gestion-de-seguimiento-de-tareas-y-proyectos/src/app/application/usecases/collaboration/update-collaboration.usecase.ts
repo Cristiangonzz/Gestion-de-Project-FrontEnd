@@ -4,7 +4,6 @@ import { IUpdateCollaborationModel } from 'src/app/domain/interfaces/collaborati
 import { CollaborationService } from 'src/app/domain/services/collaboration/collaboration.service';
 import { UseCase } from 'src/app/domain/use-case';
 import { Injectable } from '@angular/core';
-import { CollaborationImplementationRepository } from 'src/app/data/repositories/collaboration/collaboration-implementation.repository';
 
 @Injectable({
     providedIn: 'root'

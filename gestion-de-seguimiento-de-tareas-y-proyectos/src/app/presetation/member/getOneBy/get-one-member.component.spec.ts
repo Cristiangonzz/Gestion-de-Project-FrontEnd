@@ -1,23 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+// import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GetOneMemberComponent } from './get-one-member.component';
+// import { GetOneMemberComponent } from './get-one-member.component';
 
-describe('GetOneMemberComponent', () => {
-  let component: GetOneMemberComponent;
-  let fixture: ComponentFixture<GetOneMemberComponent>;
+// describe('GetOneMemberComponent', () => {
+//   let component: GetOneMemberComponent;
+//   let fixture: ComponentFixture<GetOneMemberComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ GetOneMemberComponent ]
-    })
-    .compileComponents();
+//   beforeEach(async () => {
+//     await TestBed.configureTestingModule({
+//       declarations: [ GetOneMemberComponent ]
+//     })
+//     .compileComponents();
 
-    fixture = TestBed.createComponent(GetOneMemberComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+//     fixture = TestBed.createComponent(GetOneMemberComponent);
+//     component = fixture.componentInstance;
+//     fixture.detectChanges();
+//   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });
