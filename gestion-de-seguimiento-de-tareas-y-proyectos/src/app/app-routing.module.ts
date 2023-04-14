@@ -5,7 +5,11 @@ import { PermissionGuard } from './guards/permission.guard';
 import { BackGuard } from './guards/back.guard';
 
 const routes: Routes = [
-
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
   {
      path: 'home',
      canActivate: [ PermissionGuard ],
@@ -51,11 +55,7 @@ const routes: Routes = [
     loadChildren: () => import('./presetation/team/team.module')
     .then( m => m.TeamModule )
   },
-  {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full'
-  },
+ 
 
   {
   path:   '**' ,
