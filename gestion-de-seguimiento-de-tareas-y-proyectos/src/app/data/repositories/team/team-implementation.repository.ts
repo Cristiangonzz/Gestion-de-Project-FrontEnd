@@ -49,12 +49,12 @@ export class TeamImplementationRepository extends TeamService {
     }
 
     aggregateTaskOfTeam(params: IAgregateTaskOfTeamModel): Observable<ITeamDomainModel> {
-        return this.http.put<ITeamDomainModel>(`${this.URL}/team/aggregate-task`,params,this.httpOptions);
+        return this.http.put<ITeamDomainModel>(`${this.URL}/team/agregate-task`,params,this.httpOptions);
     }
     aggregateMemberOfTeam(params: IAgregateMemberOfTeamModel): Observable<ITeamDomainModel> {
-        return this.http.put<ITeamDomainModel>(`${this.URL}/team/aggregate-member`,params,this.httpOptions);
+        return this.http.put<ITeamDomainModel>(`${this.URL}/team/agregate-member`,params,this.httpOptions);
     }
     aggregateCollaborationOfTeam(params: IAgregateCollaborationOfTeamModel): Observable<ITeamDomainModel> {
-        return this.http.put<ITeamDomainModel>(`${this.URL}/team/aggregate-collaboration`,params,this.httpOptions);
+        return this.http.put<ITeamDomainModel>(`${this.URL}/team/agregate-collaboration`,params,this.httpOptions);
     }
 }

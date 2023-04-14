@@ -21,14 +21,7 @@ export class CreateTeamComponent implements OnInit {
     project: new FormControl('',[Validators.required]),
   }); 
   
-  team : ITeamDomainModel = 
-  {  
-    name: "",
-    member: [""],
-    task: [""],
-    project: "",
-    collaboration: [""],
-  }
+  team : ITeamDomainModel = {} as ITeamDomainModel;
 
     
   constructor(
@@ -41,8 +34,8 @@ export class CreateTeamComponent implements OnInit {
   }
 
    send():void{
-    this.team.name = this.FormCreate.get('name')?.value;
-    this.team.project = this.FormCreate.get('project')?.value;
+    this.team.name = this.FormCreate.get('name')?.value as string;
+    this.team.project = this.FormCreate.get('project')?.value as string;
     this
       .factory
         .registerTeamUseCaseProvider
@@ -52,7 +45,7 @@ export class CreateTeamComponent implements OnInit {
                 (response) => {
                   console.log(response);
                   this.succes();
-                // this.router.navigate([`sign-in`]);
+                  this.router.navigate([`home/home`]);
                 },
                 (error) => {
                   console.log(error);

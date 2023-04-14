@@ -5,7 +5,7 @@
                 <option *ngFor="let t of types" [ngValue]="t">{{ t }}</option>
             </select>
         </form>
-        <input class="form-control me-2"  formControlName="searchId"  type="search" placeholder="Search" aria-label="Search">
+        <input class="form-control me-2"  formControlName="searchId"  type="search" placeholder="aggregate (id)" aria-label="Search">
         <button [disabled]="form.invalid" class="btn btn-outline-success" (click)="add()" type="submit">ADD</button>
     </form>
 </div>

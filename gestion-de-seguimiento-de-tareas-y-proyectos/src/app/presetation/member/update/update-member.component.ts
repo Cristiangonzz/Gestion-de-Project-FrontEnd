@@ -3,6 +3,7 @@ import {  FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { UpdateMemberUseCase } from 'src/app/application/usecases/member/update-member.usecase';
 import { useCaseProviders } from 'src/app/data/factory';
+import { IMemberDomainModel } from 'src/app/domain/interfaces/member/member.interface.domain';
 import { IUpdateMemberModel } from 'src/app/domain/interfaces/member/update-member.interface.domain';
 import { MemberService } from 'src/app/domain/services/member/member.service';
 import Swal from 'sweetalert2';
@@ -43,6 +44,7 @@ export class UpdateMemberComponent  implements OnInit {
 
   ngOnInit():void {
   this.paramsMemberId();
+  this.upDateFromApi();
   
   }
 
@@ -53,6 +55,18 @@ export class UpdateMemberComponent  implements OnInit {
       (params : Params) => {
         this.member._id = params['id']
       });
+  }  
+
+  
+  upDateFromApi():void{
+    this
+      .factory
+        .getMemberUseCaseProvider
+          .useFactory(this.memberService)
+            .execute(this.member._id as string)
+              .subscribe((data : IMemberDomainModel) => {
+                this.FormUpdate.patchValue(data);
+              });
   }
 
   send():void{
@@ -71,11 +85,10 @@ export class UpdateMemberComponent  implements OnInit {
               .subscribe(
                 (response:IUpdateMemberModel) => {
                   this.succes();
-                  console.log(response);
+                  this.router.navigate(['home/home']);
                 },
                 (error : Error) => {
                   this.error();
-                  console.log(error);
                 });
   }
 

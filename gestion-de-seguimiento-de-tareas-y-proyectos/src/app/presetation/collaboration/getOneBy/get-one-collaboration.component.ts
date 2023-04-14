@@ -2,23 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { DeleteCollaborationUseCase } from 'src/app/application/usecases/collaboration/delete-collaboration.usecase';
 import { GetCollaborationUseCase } from 'src/app/application/usecases/collaboration/get-collaboration.usecase';
+import { useCaseProviders } from 'src/app/data/factory';
 import { ICollaborationDomainModel } from 'src/app/domain/interfaces/collaboration/collaboration.interface.domain';
+import { CollaborationService } from 'src/app/domain/services/collaboration/collaboration.service';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-get-one-collaboration',
-  providers: [GetCollaborationUseCase, DeleteCollaborationUseCase],
   templateUrl: './get-one-collaboration.component.html',
   styleUrls: ['./get-one-collaboration.component.css']
 })
 export class GetOneCollaborationComponent implements OnInit {
-
+  provider = useCaseProviders;
   collaborationId: string = ""; 
-  protected collaboration!: ICollaborationDomainModel; //lo que me traiga la api desde mi servicio se lo tengo que igual a mi varaible collaboration
+  collaboration: ICollaborationDomainModel = {} as ICollaborationDomainModel; //lo que me traiga la api desde mi servicio se lo tengo que igual a mi varaible collaboration
   
   constructor(
-    private readonly getOneUseCase : GetCollaborationUseCase ,
-    private readonly deleteUseCase : DeleteCollaborationUseCase ,
+    private readonly collaborationService : CollaborationService ,
     private readonly route : ActivatedRoute,
     private router : Router){}
 
@@ -39,8 +39,13 @@ export class GetOneCollaborationComponent implements OnInit {
 
 //Ahora este id es el que tengo enviar al servicio para traer el collaboration 
   getOnecollaboration(id : string):void{
-    this.getOneUseCase.execute(id).subscribe(
-      (data: ICollaborationDomainModel) => {this.collaboration = data},
+    this
+      .provider
+        .getCollaborationUseCaseProvider
+          .useFactory(this.collaborationService)
+            .execute(id)
+              .subscribe(
+                (data: ICollaborationDomainModel) => {this.collaboration = data},
     )
   }
 
@@ -61,28 +66,32 @@ export class GetOneCollaborationComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-  
-          this.deleteUseCase.execute(this.collaborationId).subscribe(
-            (response) => {
-              Swal.fire(
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
-              )
-              this.router.navigate([`collaboration/register`]);
-              console.log(response);
-            },
-            (error:Error) => {
-              Swal.fire({
-              position: 'top-end',
-              icon: 'error',
-              title: 'not Delete',
-              showConfirmButton: false,
-              timer: 2500
-            })
-              console.log(error);
-            }
-          );
+          this
+            .provider
+              .deleteCollaborationUseCaseProvider
+                .useFactory(this.collaborationService)
+                  .execute(this.collaborationId)
+                    .subscribe(
+                      (response) => {
+                        Swal.fire(
+                          'Deleted!',
+                          'Your file has been deleted.',
+                          'success'
+                        )
+                        this.router.navigate([`collaboration/register`]);
+                        console.log(response);
+                      },
+                      (error:Error) => {
+                        Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'not Delete',
+                        showConfirmButton: false,
+                        timer: 2500
+                      })
+                        console.log(error);
+                      }
+                    );
       }
     })
     

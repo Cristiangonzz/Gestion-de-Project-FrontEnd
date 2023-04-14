@@ -59,7 +59,7 @@ export class RegisterMemberComponent implements OnInit {
               .subscribe(
                 (response) => {
                   console.log(response);
-                  createUserWithEmailAndPassword(this.auth,this.member.email,this.member.password);
+                  this.factory.signUpFireBaseUseCasepProvaider.useFactory(this.auth).execute(this.member);
                   this.succes();
                   this.router.navigate([`login/sign-in`]);
                 },

@@ -5,7 +5,8 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { useCaseProviders } from 'src/app/data/factory';
 import { MemberService } from 'src/app/domain/services/member/member.service';
-import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { Auth, UserCredential, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { IRegisterMemberDomainModel } from 'src/app/domain/interfaces/member/register-member.interface.domain';
 
 @Component({
   selector: 'app-sing-in-member',
@@ -21,7 +22,15 @@ export class SingInMemberComponent {
   }); 
 
   member : SignInModel = {} as SignInModel;
- 
+  newMemberRegister : IRegisterMemberDomainModel = {
+    name: "" ,
+    document: "" ,
+    salary: 0 ,
+    role: "" ,
+
+    email:"" ,
+    password:"" ,
+  } ;
 
   constructor(
     private memberService: MemberService,
@@ -30,9 +39,8 @@ export class SingInMemberComponent {
     ) {}
   signIn(){
     this.member = this.formLogin.getRawValue() as SignInModel ;
+    this.factory.signInFireBaseUseCasepProvaider.useFactory(this.auth).execute(this.member);
 
-    signInWithEmailAndPassword(this.auth,this.member.email,this.member.password);
-    
     this.factory
       .signInMemberUseCaseProvider
         .useFactory(this.memberService)
@@ -50,7 +58,56 @@ export class SingInMemberComponent {
     });
   }
 
-  google(){}
+  google(){
+    this.factory.signInGoogleUseCasepProvaider.useFactory(this.auth).execute().subscribe(
+      (data: UserCredential) => {
+       this.member.email = data.user.email as string;
+        this.factory.getEmailMemberUseCaseProvider.useFactory(this.memberService).execute(this.member.email).subscribe(
+          (data: IRegisterMemberDomainModel) => {
+            this.member.email = data.email;
+            this.member.password = data.password;
+            this.factory.signInFireBaseUseCasepProvaider.useFactory(this.auth).execute(this.member);
+            this.factory
+            .signInMemberUseCaseProvider
+              .useFactory(this.memberService)
+                .execute(this.member)
+                  .subscribe({
+                    next: (response: string) => {
+                      localStorage.setItem('token', response);
+                      this.succes();
+                      this.router.navigate([`home`]);
+                    },
+                    error: (err: Error) => {
+                      
+                      this.error();
+                      throw new Error ("Not Found Register",err);
+                    }
+          });
+            this.succes();
+            this.router.navigate([`home`]);
+          },
+          (err: Error) => {
+            this.error();
+            throw new Error ("Not Found Register",err);
+          }
+        )
+      },
+      (err: Error) => {
+        this.error();
+        throw new Error ("Not Found Register",err);
+      });
+    
+}
+
+ 
+
+  getMember():boolean{
+    if(this.factory.getEmailMemberUseCaseProvider.useFactory(this.memberService).execute(this.member.email)){
+      return true;
+    }
+    return false;
+  }
+
   register(){
     this.router.navigate([`login/register`]);
   }
@@ -78,3 +135,4 @@ export class SingInMemberComponent {
 
 
 }
+

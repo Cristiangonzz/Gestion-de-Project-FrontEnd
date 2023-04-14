@@ -1,7 +1,9 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
+import { HasUserTokenDecodeUseCase } from 'src/app/application/usecases/login-fire-base/get-token-local-storage.use-case';
 import { HasUserUseCase } from 'src/app/application/usecases/login-fire-base/has-user.use-case';
 import { useCaseProviders } from 'src/app/data/factory';
+import { ITokenUser } from 'src/app/domain/interfaces/member/token-user-interfaces';
 
 
 
@@ -15,19 +17,22 @@ export class ToolbarComponent  implements  OnInit{
   factory = useCaseProviders;
   isAdmin?: boolean ;
 
+  tokenUser : ITokenUser = {} as ITokenUser ;
+
   constructor(
     private router : Router,
-    private readonly hasUserUseCase: HasUserUseCase,
     ){}
       
 
   ngOnInit(): void {
     this
-      .hasUserUseCase
-          .statusEmmit
-            .subscribe((status: boolean) => {
-              this.isAdmin = status;
-            }
+      .factory
+        .hasUserUseCaseProvider
+          .useFactory()
+            .statusEmmit
+              .subscribe((status: boolean) => {
+               this.isAdmin = status;
+              }
     );
   }
 
@@ -52,6 +57,14 @@ export class ToolbarComponent  implements  OnInit{
   btnLogin(){
     localStorage.removeItem('token');
     this.router.navigate(['login'])
+  }
+
+  btnUpdate(){
+
+    this.factory.DecodeUseCaseProviders.useFactory().execute().subscribe((token: ITokenUser) => {
+      this.router.navigate([`member/update/${token.member._id}`])
+    });
+
   }
  
    

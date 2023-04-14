@@ -28,49 +28,470 @@ import { MemberService } from '../domain/services/member/member.service';
 import { SingInMemberUseCase } from '../application/usecases/member/sing-in-member.usecase';
 import { RegisterMemberUseCase } from '../application/usecases/member/register-member.usecase';
 import { HasUserUseCase } from '../application/usecases/login-fire-base/has-user.use-case';
+import { GetEmailMemberUseCase } from '../application/usecases/member/get-email-member.usecase';
+import { HasUserTokenDecodeUseCase } from '../application/usecases/login-fire-base/get-token-local-storage.use-case';
+import { SignInFireBaseUseCase } from '../application/usecases/login-fire-base/sign-in-fire-base.use-case';
+import { Auth } from '@angular/fire/auth';
+import { SignUpFireBaseUseCase } from '../application/usecases/login-fire-base/sign-up-fire-base.use-case';
+import { SignInGoogleUseCase } from '../application/usecases/login-fire-base/sign-in-google.use-case';
 
 //collaborationconst 
-const RegisterCollaborationUseCaseFactory = (collaborationService: CollaborationService) => new RegisterCollaborationUseCase(collaborationService);
-const GetCollaborationUseCaseFactory = (collaborationService: CollaborationService) => new GetCollaborationUseCase(collaborationService);
-const UpdateCollaborationUseCaseFactory = (collaborationService: CollaborationService) => new UpdateCollaborationUseCase(collaborationService);
-const DeleteCollaborationUseCaseFactory = (collaborationService: CollaborationService) => new DeleteCollaborationUseCase(collaborationService);
+const RegisterCollaborationUseCaseFactory = 
+(() => {
+    let instance: RegisterCollaborationUseCase;
+  
+    const factory = (collaborationService: CollaborationService): RegisterCollaborationUseCase => {
+      if (!instance) {
+        instance = new RegisterCollaborationUseCase(collaborationService);
+      }
+  
+      return instance;
+    };
+  
+    return factory;
+})();
 
+const GetCollaborationUseCaseFactory = 
+(() => {
+    let instance: GetCollaborationUseCase;
+  
+    const factory = (collaborationService: CollaborationService): GetCollaborationUseCase => {
+      if (!instance) {
+        instance = new GetCollaborationUseCase(collaborationService);
+      }
+  
+      return instance;
+    };
+  
+    return factory;
+})();
+const UpdateCollaborationUseCaseFactory =
+(() => {
+    let instance: UpdateCollaborationUseCase;
+  
+    const factory = (collaborationService: CollaborationService): UpdateCollaborationUseCase => {
+      if (!instance) {
+        instance = new UpdateCollaborationUseCase(collaborationService);
+      }
+  
+      return instance;
+    };
+  
+    return factory;
+})();
+const DeleteCollaborationUseCaseFactory = 
+(() => {
+    let instance: DeleteCollaborationUseCase;
+  
+    const factory = (collaborationService: CollaborationService): DeleteCollaborationUseCase => {
+      if (!instance) {
+        instance = new DeleteCollaborationUseCase(collaborationService);
+      }
+  
+      return instance;
+    };
+  
+    return factory;
+})();
 // project
-const RegisterProjectUseCaseFactory = (projectService: ProjectService) => new RegisterProjectUseCase(projectService);
-const GetProjectUseCaseFactory = (projectService: ProjectService) => new GetProjectUseCase(projectService);
+const RegisterProjectUseCaseFactory = 
+(() => {
+    let instance: RegisterProjectUseCase;
+  
+    const factory = (projectService: ProjectService): RegisterProjectUseCase => {
+      if (!instance) {
+        instance = new RegisterProjectUseCase(projectService);
+      }
+  
+      return instance;
+    };
+  
+    return factory;
+})();
+const GetProjectUseCaseFactory = 
+(() => {
+    let instance: GetProjectUseCase;
+  
+    const factory = (projectService: ProjectService): GetProjectUseCase => {
+      if (!instance) {
+        instance = new GetProjectUseCase(projectService);
+      }
+  
+      return instance;
+    };
+  
+    return factory;
+})();
 const UpdateProjectUseCaseFactory = (projectService: ProjectService) => new UpdateProjectUseCase(projectService);
-const DeleteProjectUseCaseFactory = (projectService: ProjectService) => new DeleteProjectUseCase(projectService);
 
+const DeleteProjectUseCaseFactory = 
+(() => {
+    let instance: DeleteProjectUseCase;
+  
+    const factory = (projectService: ProjectService): DeleteProjectUseCase => {
+      if (!instance) {
+        instance = new DeleteProjectUseCase(projectService);
+      }
+  
+      return instance;
+    };
+  
+    return factory;
+})();
 //task
-const RegisterTaskUseCaseFactory = (taskService: TaskService) => new RegisterTaskUseCase(taskService);
-const GetTaskUseCaseFactory = (taskService: TaskService) => new GetTaskUseCase(taskService);
-const UpdateTaskUseCaseFactory = (taskService: TaskService) => new UpdateTaskUseCase(taskService);
-const DeleteTaskUseCaseFactory = (taskService: TaskService) => new DeleteTaskUseCase(taskService);
-
+const RegisterTaskUseCaseFactory = 
+(() => {
+    let instance: RegisterTaskUseCase;
+  
+    const factory = (taskService: TaskService): RegisterTaskUseCase => {
+      if (!instance) {
+        instance = new RegisterTaskUseCase(taskService);
+      }
+  
+      return instance;
+    };
+  
+    return factory;
+})();
+const GetTaskUseCaseFactory = 
+(() => {
+    let instance: GetTaskUseCase;
+  
+    const factory = (taskService: TaskService): GetTaskUseCase => {
+      if (!instance) {
+        instance = new GetTaskUseCase(taskService);
+      }
+  
+      return instance;
+    };
+  
+    return factory;
+})();
+const UpdateTaskUseCaseFactory = 
+(() => {
+    let instance: UpdateTaskUseCase;
+  
+    const factory = (taskService: TaskService): UpdateTaskUseCase => {
+      if (!instance) {
+        instance = new UpdateTaskUseCase(taskService);
+      }
+  
+      return instance;
+    };
+  
+    return factory;
+})();
+const DeleteTaskUseCaseFactory =
+(() => {
+    let instance: DeleteTaskUseCase;
+  
+    const factory = (taskService: TaskService): DeleteTaskUseCase => {
+      if (!instance) {
+        instance = new DeleteTaskUseCase(taskService);
+      }
+  
+      return instance;
+    };
+  
+    return factory;
+})();
 //team
-const RegisterTeamUseCaseFactory = (teamService: TeamService) => new RegisterTeamUseCase(teamService);
-const GetTeamUseCaseFactory = (teamService: TeamService) => new GetTeamUseCase(teamService);
-const UpdateTeamUseCaseFactory = (teamService: TeamService) => new UpdateTeamUseCase(teamService);
-const DeleteTeamUseCaseFactory = (teamService: TeamService) => new DeleteTeamUseCase(teamService);
-const AggregateTaskOfTeamUseCaseFactory = (teamService: TeamService) => new AggregateTaskOfTeamUseCase(teamService);
+const RegisterTeamUseCaseFactory = 
+(() => {
+    let instance: RegisterTeamUseCase;
+  
+    const factory = (teamService: TeamService): RegisterTeamUseCase => {
+      if (!instance) {
+        instance = new RegisterTeamUseCase(teamService);
+      }
+  
+      return instance;
+    };
+  
+    return factory;
+})();
+
+
+const GetTeamUseCaseFactory = 
+(() => {
+    let instance: GetTeamUseCase;
+  
+    const factory = (teamService: TeamService): GetTeamUseCase => {
+      if (!instance) {
+        instance = new GetTeamUseCase(teamService);
+      }
+  
+      return instance;
+    };
+  
+    return factory;
+})();
+
+
+const UpdateTeamUseCaseFactory = 
+(() => {
+    let instance: UpdateTeamUseCase;
+  
+    const factory = (teamService: TeamService): UpdateTeamUseCase => {
+      if (!instance) {
+        instance = new UpdateTeamUseCase(teamService);
+      }
+  
+      return instance;
+    };
+  
+    return factory;
+})();
+
+
+const DeleteTeamUseCaseFactory = 
+(() => {
+    let instance: DeleteTeamUseCase;
+  
+    const factory = (teamService: TeamService): DeleteTeamUseCase => {
+      if (!instance) {
+        instance = new DeleteTeamUseCase(teamService);
+      }
+  
+      return instance;
+    };
+  
+    return factory;
+})();
+
+
+const AggregateTaskOfTeamUseCaseFactory = 
+(() => {
+    let instance: AggregateTaskOfTeamUseCase;
+  
+    const factory = (teamService: TeamService): AggregateTaskOfTeamUseCase => {
+      if (!instance) {
+        instance = new AggregateTaskOfTeamUseCase(teamService);
+      }
+  
+      return instance;
+    };
+  
+    return factory;
+})();
+
+
+
 const AggregateCollaborationOfTeamUseCaseFactory = (teamService: TeamService) => new AggregateCollaborationOfTeamUseCase(teamService);
-const AggregateMemberOfTeamUseCaseFactory = (teamService: TeamService) => new AggregateMemberOfTeamUseCase(teamService);
+(() => {
+    let instance: AggregateMemberOfTeamUseCase;
+  
+    const factory = (teamService: TeamService): AggregateMemberOfTeamUseCase => {
+      if (!instance) {
+        instance = new AggregateMemberOfTeamUseCase(teamService);
+      }
+  
+      return instance;
+    };
+  
+    return factory;
+})();
+
+const AggregateMemberOfTeamUseCaseFactory = 
+(() => {
+    let instance: AggregateMemberOfTeamUseCase;
+  
+    const factory = (teamService: TeamService): AggregateMemberOfTeamUseCase => {
+      if (!instance) {
+        instance = new AggregateMemberOfTeamUseCase(teamService);
+      }
+  
+      return instance;
+    };
+  
+    return factory;
+})();
 
 //Member
-const SignInMemberUseCaseFactory = (memberService: MemberService) => new SingInMemberUseCase(memberService);
-const GetMemberUseCaseFactory = (memberService: MemberService) => new GetMemberUseCase(memberService);
-const UpdateMemberUseCaseFactory = (memberService: MemberService) => new UpdateMemberUseCase(memberService);
-const DeleteMemberUseCaseFactory = (memberService: MemberService) => new DeleteMemberUseCase(memberService);
-const RegisterMemberUseCaseFactory = (memberService: MemberService) => new RegisterMemberUseCase(memberService);
+const SignInMemberUseCaseFactory =
+(() => {
+    let instance: SingInMemberUseCase;
+  
+    const factory = (memberService: MemberService): SingInMemberUseCase => {
+      if (!instance) {
+        instance = new SingInMemberUseCase(memberService);
+      }
+  
+      return instance;
+    };
+  
+    return factory;
+})();
+
+const GetMemberUseCaseFactory = 
+(() => {
+    let instance: GetMemberUseCase;
+  
+    const factory = (memberService: MemberService): GetMemberUseCase => {
+      if (!instance) {
+        instance = new GetMemberUseCase(memberService);
+      }
+  
+      return instance;
+    };
+  
+    return factory;
+})();
+
+const GetEmailMemberUseCaseFactory = 
+(() => {
+    let instance: GetEmailMemberUseCase;
+  
+    const factory = (memberService: MemberService): GetEmailMemberUseCase => {
+      if (!instance) {
+        instance = new GetEmailMemberUseCase(memberService);
+      }
+  
+      return instance;
+    };
+  
+    return factory;
+})();
+
+
+const UpdateMemberUseCaseFactory = 
+(() => {
+    let instance: UpdateMemberUseCase;
+  
+    const factory = (memberService: MemberService): UpdateMemberUseCase => {
+      if (!instance) {
+        instance = new UpdateMemberUseCase(memberService);
+      }
+  
+      return instance;
+    };
+  
+    return factory;
+})();
+const DeleteMemberUseCaseFactory = 
+(() => {
+    let instance: DeleteMemberUseCase;
+  
+    const factory = (memberService: MemberService): DeleteMemberUseCase => {
+      if (!instance) {
+        instance = new DeleteMemberUseCase(memberService);
+      }
+  
+      return instance;
+    };
+  
+    return factory;
+})();
+
+const RegisterMemberUseCaseFactory = (() => {
+    let instance: RegisterMemberUseCase;
+  
+    const factory = (memberService: MemberService): RegisterMemberUseCase => {
+      if (!instance) {
+        instance = new RegisterMemberUseCase(memberService);
+      }
+  
+      return instance;
+    };
+  
+    return factory;
+  })();
 
 //Autentication
-const HasUserUseCaseFactory = () => new HasUserUseCase();
+const HasUserUseCaseFactory = (() => {
+    let instance :HasUserUseCase;
+  
+    return () => {
+      if (!instance) {
+        instance = new HasUserUseCase();
+      }
+  
+      return instance;
+    };
+  })();
+
+
+const DecodeUseCaseFactorty = () => new HasUserTokenDecodeUseCase();
+(() => {
+  let instance: HasUserTokenDecodeUseCase;
+
+  const factory = (): HasUserTokenDecodeUseCase => {
+    if (!instance) {
+      instance = new HasUserTokenDecodeUseCase();
+    }
+
+    return instance;
+  };
+
+  return factory;
+})();
+
+
+const SignInFireBaseUseCaseFactory =
+(() => {
+  let instance: SignInFireBaseUseCase;
+
+  const factory = (auth: Auth): SignInFireBaseUseCase => {
+    if (!instance) {
+      instance = new SignInFireBaseUseCase(auth);
+    }
+
+    return instance;
+  };
+
+  return factory;
+})();
+
+const SignUpFireBaseUseCaseFactory =
+(() => {
+  let instance: SignUpFireBaseUseCase;
+
+  const factory = (auth: Auth): SignUpFireBaseUseCase => {
+    if (!instance) {
+      instance = new SignUpFireBaseUseCase(auth);
+    }
+
+    return instance;
+  };
+
+  return factory;
+})();
+
+const SignInGoogleUseCaseFactory =
+(() => {
+  let instance: SignInGoogleUseCase;
+
+  const factory = (auth: Auth): SignInGoogleUseCase => {
+    if (!instance) {
+      instance = new SignInGoogleUseCase(auth);
+    }
+
+    return instance;
+  };
+
+  return factory;
+})();
+
 
 export const useCaseProviders = {
 
-    hasUserUseCaseProvider : {
-        provide: HasUserUseCase,
-        useFactory: HasUserUseCaseFactory,
+    signUpFireBaseUseCasepProvaider : 
+    {
+        provide: SignUpFireBaseUseCase,
+        useFactory: SignUpFireBaseUseCaseFactory,
+        deps: [Auth],
+    },
+    signInFireBaseUseCasepProvaider : 
+    {
+        provide: SignUpFireBaseUseCase,
+        useFactory: SignInFireBaseUseCaseFactory,
+        deps: [Auth],
+    },
+    signInGoogleUseCasepProvaider : 
+    {
+        provide: SignInGoogleUseCase,
+        useFactory: SignInGoogleUseCaseFactory,
+        deps: [Auth],
     },
     registerMemberUseCaseProvider : 
     {
@@ -78,6 +499,16 @@ export const useCaseProviders = {
         useFactory: RegisterMemberUseCaseFactory,
         deps: [MemberService],
     },
+    DecodeUseCaseProviders : {
+        provide: HasUserTokenDecodeUseCase,
+        useFactory: DecodeUseCaseFactorty,
+    },
+
+    hasUserUseCaseProvider : {
+        provide: HasUserUseCase,
+        useFactory: HasUserUseCaseFactory,
+    },
+  
     deleteMembernUseCaseProvider : {
         provide: UpdateMemberUseCase,
         useFactory: DeleteMemberUseCaseFactory,
@@ -93,6 +524,12 @@ export const useCaseProviders = {
         useFactory: GetMemberUseCaseFactory,
         deps: [MemberService],
     },
+    getEmailMemberUseCaseProvider : {
+        provide: GetEmailMemberUseCase,
+        useFactory: GetEmailMemberUseCaseFactory,
+        deps: [MemberService],
+    },
+
     signInMemberUseCaseProvider : {
         provide: SingInMemberUseCase,
         useFactory: SignInMemberUseCaseFactory,
@@ -194,3 +631,4 @@ export const useCaseProviders = {
         deps: [CollaborationService],
     },
 }
+

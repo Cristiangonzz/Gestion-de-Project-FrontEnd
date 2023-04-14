@@ -1,6 +1,7 @@
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-
+   
     <ng-container *ngIf="!isAdmin,else viewAdmin">
 
     <a class="navbar-brand" style="margin-left: 45%;color: rgb(5, 5, 106);" (click)="btnPrincipal()">M-Project</a>
@@ -71,6 +72,11 @@
               <a mat-menu-item class="" (click)="btnLogin()">
                 <mat-icon>logout</mat-icon>
                 logout
+              </a>
+
+              <a mat-menu-item class="" (click)="btnUpdate()">
+                <mat-icon>update</mat-icon>
+                update
               </a>
             </mat-menu>
         </li>

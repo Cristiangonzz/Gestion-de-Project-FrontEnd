@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
-import { Observable, from, of } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Observable, of } from 'rxjs';
+import { ITokenUser } from 'src/app/domain/interfaces/member/token-user-interfaces';
+import { UseCase } from 'src/app/domain/use-case';
 
 @Injectable({
     providedIn: 'root'
 })
-export class HasUserTokenDecodeUseCase{
+export class HasUserTokenDecodeUseCase implements UseCase<undefined,ITokenUser>{
     private helper = new JwtHelperService();
 
-    execute():Observable<any>{
+    execute(): Observable<ITokenUser> {
         const token = localStorage.getItem('token'); 
       if(token){
-        return from(this.helper.decodeToken(token));
-      } 
-      return of(false);
+        return of(this.helper.decodeToken(token) as ITokenUser);
+      }
+      const t : ITokenUser = {} as ITokenUser;
+        return of(t);
     }
 }

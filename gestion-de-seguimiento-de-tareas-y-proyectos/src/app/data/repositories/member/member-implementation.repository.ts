@@ -11,6 +11,7 @@ import { SignInModel } from 'src/app/domain/interfaces/member/singin.member.doma
     providedIn: 'root',
 })
 export class MemberImplementationRepository extends MemberService {
+   
   
     URL = "https://gestion-de-project-backend-production.up.railway.app";
 
@@ -41,6 +42,11 @@ export class MemberImplementationRepository extends MemberService {
 
     getMember(data: string): Observable<IMemberDomainModel> {
         return this.http.get<IMemberDomainModel>(`${this.URL}/member/get/${data}`,this.httpOptions);
+    }
+
+    getEmailMember(data: string): Observable<IMemberDomainModel> {
+        return this.http.get<IMemberDomainModel>(`${this.URL}/member/get-email/${data}`,this.httpOptions);
+
     }
     
     updateMember(entity: IUpdateMemberModel): Observable<IMemberDomainModel> {
