@@ -118,7 +118,7 @@ export class SingInMemberComponent {
       icon: 'success',
       title: 'welcome to project manager ',
       showConfirmButton: false,
-      timer: 2500
+      timer: 1000
     })
    }
 
