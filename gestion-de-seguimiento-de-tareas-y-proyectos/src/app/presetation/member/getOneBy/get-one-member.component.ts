@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 export class GetOneMemberComponent implements OnInit {
 factory = useCaseProviders;
   memberId: string = ""; 
-  protected member!: IMemberDomainModel; //lo que me traiga la api desde mi servicio se lo tengo que igual a mi varaible member
+   member!: IMemberDomainModel; //lo que me traiga la api desde mi servicio se lo tengo que igual a mi varaible member
   
   constructor(
     private readonly memberService : MemberService ,

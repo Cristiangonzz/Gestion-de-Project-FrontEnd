@@ -14,12 +14,18 @@ export class ListOneTaskComponent implements OnInit {
   factory = useCaseProviders;
 
   taskId: string = ""; 
-  protected task!: ITaskDomainModel; //lo que me traiga la api desde mi servicio se lo tengo que igual a mi varaible task
+  public task!: ITaskDomainModel; //lo que me traiga la api desde mi servicio se lo tengo que igual a mi varaible task
   
   constructor(
     private readonly taskService : TaskService ,
     private readonly route : ActivatedRoute,
     private router : Router){}
+    
+    getOnetask(id : string):void{
+      this.factory.getTaskUseCaseProvider.useFactory(this.taskService).execute(id).subscribe(
+        (data: ITaskDomainModel) => {this.task = data},
+      )
+    }
 
   ngOnInit(): void {
     this.paramstaskId(); //igualo mi variable taskId con el parametro que me llega
@@ -37,11 +43,6 @@ export class ListOneTaskComponent implements OnInit {
 
 
 //Ahora este id es el que tengo enviar al servicio para traer el task 
-  getOnetask(id : string):void{
-    this.factory.getTaskUseCaseProvider.useFactory(this.taskService).execute(id).subscribe(
-      (data: ITaskDomainModel) => {this.task = data},
-    )
-  }
 
   
   //Redirecciono a este componente si apreta click en editar

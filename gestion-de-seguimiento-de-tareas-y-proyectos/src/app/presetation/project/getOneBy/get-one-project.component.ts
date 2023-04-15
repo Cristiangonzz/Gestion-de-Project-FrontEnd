@@ -9,18 +9,16 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-get-one-project',
-  providers: [GetProjectUseCase, DeleteProjectUseCase],
   templateUrl: './get-one-project.component.html',
   styleUrls: ['./get-one-project.component.css']
 })
 export class GetOneProjectComponent implements OnInit {
   factory = useCaseProviders;
   projectId: string = ""; 
-  protected project!: IProjectDomainModel; //lo que me traiga la api desde mi servicio se lo tengo que igual a mi varaible project
+  project!: IProjectDomainModel; //lo que me traiga la api desde mi servicio se lo tengo que igual a mi varaible project
   
   constructor(
-    private readonly getOneUseCase : GetProjectUseCase ,
-    private readonly deleteUseCase : DeleteProjectUseCase ,
+  
     private readonly projectService : ProjectService,
     private readonly route : ActivatedRoute,
     private router : Router){}
@@ -42,7 +40,7 @@ export class GetOneProjectComponent implements OnInit {
 
 //Ahora este id es el que tengo enviar al servicio para traer el project 
   getOneproject(id : string):void{
-    this.getOneUseCase.execute(id).subscribe(
+    this.factory.getProjectUseCaseProvider.useFactory(this.projectService).execute(id).subscribe(
       (data: IProjectDomainModel) => {this.project = data},
     )
   }

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import { DeleteCollaborationUseCase } from 'src/app/application/usecases/collaboration/delete-collaboration.usecase';
-import { GetCollaborationUseCase } from 'src/app/application/usecases/collaboration/get-collaboration.usecase';
 import { useCaseProviders } from 'src/app/data/factory';
 import { ICollaborationDomainModel } from 'src/app/domain/interfaces/collaboration/collaboration.interface.domain';
 import { CollaborationService } from 'src/app/domain/services/collaboration/collaboration.service';

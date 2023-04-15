@@ -55,8 +55,6 @@ const routes: Routes = [
     loadChildren: () => import('./presetation/team/team.module')
     .then( m => m.TeamModule )
   },
- 
-
   {
   path:   '**' ,
   redirectTo: 'login',

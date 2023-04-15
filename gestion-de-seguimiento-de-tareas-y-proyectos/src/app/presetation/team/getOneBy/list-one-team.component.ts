@@ -1,24 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import { DeleteTeamUseCase } from 'src/app/application/usecases/team/delete-team.usecase';
-import { GetTeamUseCase } from 'src/app/application/usecases/team/get-team.usecase';
+import { useCaseProviders } from 'src/app/data/factory';
 import { ITeamDomainModel } from 'src/app/domain/interfaces/team/team.interface.domain';
+import { TeamService } from 'src/app/domain/services/team/team.service';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-one-team',
-  providers: [GetTeamUseCase, DeleteTeamUseCase],
   templateUrl: './list-one-team.component.html',
   styleUrls: ['./list-one-team.component.css']
 })
 export class ListOneTeamComponent implements OnInit {
-
+  factory = useCaseProviders;
   teamId: string = ""; 
-  protected team!: ITeamDomainModel; //lo que me traiga la api desde mi servicio se lo tengo que igual a mi varaible team
+  team!: ITeamDomainModel; //lo que me traiga la api desde mi servicio se lo tengo que igual a mi varaible team
   
   constructor(
-    private readonly getOneUseCase : GetTeamUseCase ,
-    private readonly deleteUseCase : DeleteTeamUseCase ,
+    private readonly serviceTeam : TeamService ,
     private readonly route : ActivatedRoute,
     private router : Router){}
 
@@ -39,7 +37,7 @@ export class ListOneTeamComponent implements OnInit {
 
 //Ahora este id es el que tengo enviar al servicio para traer el team 
   getOneteam(id : string):void{
-    this.getOneUseCase.execute(id).subscribe(
+    this.factory.getTeamUseCaseProvider.useFactory(this.serviceTeam).execute(id).subscribe(
       (data: ITeamDomainModel) => {this.team = data},
     )
   }
@@ -62,7 +60,7 @@ export class ListOneTeamComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
 
-          this.deleteUseCase.execute(this.teamId).subscribe(
+          this.factory.deleteTeamUseCaseProvider.useFactory(this.serviceTeam).execute(this.teamId).subscribe(
             (response) => {
               Swal.fire(
                 'Deleted!',

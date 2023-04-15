@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RoutingTeamModule } from './routing-team.module';
 import { CreateTeamComponent } from './create/create-team.component';
 import { UpdateTeamComponent } from './update/update-team.component';
-import { ListAllTeamComponent } from './list/list-all-team.component';
 import { ListOneTeamComponent } from './getOneBy/list-one-team.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,7 +17,7 @@ import { DataModule } from 'src/app/data/data.module';
   declarations: [
     CreateTeamComponent,
     UpdateTeamComponent,
-    ListAllTeamComponent,
+
     ListOneTeamComponent,
     AggregateComponent,
   ],
@@ -36,7 +35,6 @@ import { DataModule } from 'src/app/data/data.module';
   exports: [
     CreateTeamComponent,
     UpdateTeamComponent,
-    ListAllTeamComponent,
     ListOneTeamComponent,
     AggregateComponent,
   ]

@@ -8,9 +8,6 @@ import { Injectable } from '@angular/core';
     providedIn: 'root'
 })
 export abstract class TaskService {
-    getTaskUseCase(getTaskUseCase: any, arg1: string) {
-        throw new Error('Method not implemented.');
-    }
   
     abstract deleteTask(data: string): Observable<boolean>;
 

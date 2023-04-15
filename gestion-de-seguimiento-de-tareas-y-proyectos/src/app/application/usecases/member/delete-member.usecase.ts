@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MemberImplementationRepository } from 'src/app/data/repositories/member/member-implementation.repository';
 import { UseCase } from 'src/app/domain/use-case';
 import { MemberService } from '../../../domain/services/member/member.service';
 @Injectable({
