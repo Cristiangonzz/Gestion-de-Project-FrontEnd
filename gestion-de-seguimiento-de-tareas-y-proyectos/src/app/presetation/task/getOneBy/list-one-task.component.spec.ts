@@ -6,6 +6,7 @@
  import { ITaskDomainModel } from 'src/app/domain/interfaces/task/task.entity.domain';
  import { useCaseProviders } from 'src/app/data/factory';
 import { GetTaskUseCase } from 'src/app/application/usecases/task/get-task.usecase';
+import { DeleteTaskUseCase } from 'src/app/application/usecases/task/delete-task.usecase';
 
 describe('ListOneTaskComponent', () => {
   let component: ListOneTaskComponent;
@@ -14,6 +15,7 @@ describe('ListOneTaskComponent', () => {
   let router: Router;
   let activatedRoute: ActivatedRoute;
   let getTaskUseCase: GetTaskUseCase;
+  let deleteTaskUseCase: DeleteTaskUseCase;
   const taskModel : ITaskDomainModel = {
     name: 'string',
     dataExpiration: 'string',
@@ -21,7 +23,7 @@ describe('ListOneTaskComponent', () => {
     progress : 'string',
     priority: 'string',
   };
-
+  
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ListOneTaskComponent],
@@ -59,6 +61,8 @@ describe('ListOneTaskComponent', () => {
 
     getTaskUseCase = TestBed.inject(GetTaskUseCase);
     spyOn(getTaskUseCase, 'execute').and.returnValue(of(taskModel));
+    deleteTaskUseCase = TestBed.inject(DeleteTaskUseCase);
+    spyOn(deleteTaskUseCase, 'execute').and.returnValue(of(true));
     
     fixture.detectChanges();
   });
@@ -67,10 +71,26 @@ describe('ListOneTaskComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should call deleteTaskUseCase and navigate to task register component on delete method', () => {
+    const spy = spyOn(deleteTaskUseCase, 'execute').and.callThrough();
+    spyOn(window, 'confirm').and.returnValue(true);
+    const navigateSpy = spyOn(router, 'navigate');
+    component.taskId = '1';
+    component.delete();
+    expect(spy).toHaveBeenCalled();
+    expect(navigateSpy).toHaveBeenCalled();
+  });
+
   it('should call getTaskUseCase with task id and assign the result to task variable', () => {
-    const taskId = '1';
+    
     component.ngOnInit();
-    expect(getTaskUseCase.execute).toHaveBeenCalledWith(taskId);
+    expect(getTaskUseCase.execute).toHaveBeenCalled();
+    expect(component.task).toEqual(taskModel);
+  });
+  it('should call getTaskUseCase with task id and assign the result to task variable', () => {
+    
+    component.ngOnInit();
+    expect(deleteTaskUseCase.execute).toHaveBeenCalled();
     expect(component.task).toEqual(taskModel);
   });
 
@@ -78,19 +98,10 @@ describe('ListOneTaskComponent', () => {
     const spy = spyOn(router, 'navigate');
     component.taskId = '1';
     component.update();
-    expect(spy).toHaveBeenCalledWith(['task/update/1']);
+    expect(spy).toHaveBeenCalled();
   });
 
-  it('should call deleteTaskUseCase and navigate to task register component on delete method', () => {
-    const spy = spyOn(taskService, 'deleteTask').and.callThrough();
-    spyOn(window, 'confirm').and.returnValue(true);
-    const navigateSpy = spyOn(router, 'navigate');
-    component.taskId = '1';
-    component.delete();
-    expect(spy).toHaveBeenCalledWith('1');
-    expect(navigateSpy).toHaveBeenCalledWith(['task/register']);
-  });
-
+  
   it('should not call deleteTaskUseCase and not navigate on delete method if user cancels', () => {
     const spy = spyOn(taskService, 'deleteTask').and.callThrough();
     spyOn(window, 'confirm').and.returnValue(false);

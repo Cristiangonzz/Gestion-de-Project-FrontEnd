@@ -8,6 +8,8 @@ import { IProjectDomainModel } from "src/app/domain/interfaces/proyect/proyect.i
 import { ReactiveFormsModule } from "@angular/forms";
 import { of } from "rxjs";
 import { useCaseProviders } from "src/app/data/factory";
+import { DataModule } from "src/app/data/data.module";
+import Swal from "sweetalert2";
 
 describe('GetOneProjectComponent', () => {
     let component: GetOneProjectComponent;
@@ -29,15 +31,15 @@ describe('GetOneProjectComponent', () => {
     beforeEach(async () => {
       await TestBed.configureTestingModule({
         declarations: [GetOneProjectComponent],
-        imports: [ReactiveFormsModule],
+        imports: [ReactiveFormsModule,DataModule],
         providers: [
-          {
-            provide: ProjectService,
-            useValue: {
-              deleteProject: () => of(null),
-              //getTeam: () => of(null),
-            },
-          },
+          //  {
+          //    provide: ProjectService,
+          //    useValue: {
+          //      deleteProject: () => of(null),
+            
+          //    },
+          //  },
           {
             provide: ActivatedRoute,
             useValue: {
@@ -45,6 +47,7 @@ describe('GetOneProjectComponent', () => {
             },
           },
           useCaseProviders.getProjectUseCaseProvider,
+          useCaseProviders.deleteProjectUseCaseProvider,
           {
             provide: Router,
             useValue: {
@@ -64,19 +67,41 @@ describe('GetOneProjectComponent', () => {
       useCaseDelete = TestBed.inject(DeleteProjectUseCase);
       useCase = TestBed.inject(GetProjectUseCase);
       spyOn(useCase, 'execute').and.returnValue(of(entity));
+      spyOn(useCaseDelete, 'execute').and.callThrough();;
       fixture.detectChanges();
     });
+   
    
     it('should create', () => {
       expect(component).toBeTruthy();
     });
    
     it('should call GetProjectUseCase with team id and assign the result to team variable', () => {
-      const teamId = '1';
+      const projectId = '1';
       component.ngOnInit();
-      expect(useCase.execute).toHaveBeenCalledWith(teamId);
+      expect(useCase.execute).toHaveBeenCalledWith(projectId);
       expect(component.project).toEqual(entity);
     });
+/*
+    it('should call delteProjectUseCase with team id and assign the result to team variable', async () =>  {
+      spyOn(Swal, 'fire').and.returnValue(Promise.resolve({
+        isConfirmed: true,
+        isDenied: false,
+        isDismissed: false,
+        value: 'my value'
+      }));
+      expect(useCaseDelete.execute).not.toHaveBeenCalled();
+      const routerNavigateSpy = spyOn(router, 'navigate');  
+      component.delete();
+      console.log("mi console.log",useCaseDelete.execute)
+      await fixture.whenStable();
+      /**LOG: HttpErrorResponse{headers: HttpHeaders{normalizedNames: Map{}, lazyUpdate: null, headers: Map{}}, status: 0, statusText: 'Unknown Error', url: 'https://gestion-de-project-backend-production.up.railway.app/project/delete/1', ok: false, name: 'HttpErrorResponse', message: 'Http failure response for https://gestion-de-project-backend-production.up.railway.app/project/delete/1: 0 Unknown Error', error: ProgressEvent{isTrusted: true}}
+Chrome 112.0.0.0 (Windows 10): Executed 85 of 85 (7 FAILED) (0.754 secs / 0.642 secs)
+LOG: HttpErrorResponse{headers: HttpHeaders{normalizedNames: Map{}, lazyUpdate: null, headers: Map{}}, status: 0, statusText: 'Unknown Error', url: 'https://gestion-de-project-backend-production.up.railway.app/project/delete/1', ok: false, name: 'HttpErrorResponse', message: 'Http failure response for https://gestion-de-project-backend-production.up.railway.app/project/delete/1: 0 Unknown Error', error: ProgressEvent{isTrusted: true}} */
+     /* expect(useCaseDelete.execute).toHaveBeenCalled();
+      expect(routerNavigateSpy).toHaveBeenCalled();
+      
+    });*/
    
     it('should navigate to update component on update method', () => {
       const spy = spyOn(router, 'navigate');

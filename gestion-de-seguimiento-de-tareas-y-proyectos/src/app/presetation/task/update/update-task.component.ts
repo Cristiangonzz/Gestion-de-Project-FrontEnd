@@ -68,7 +68,6 @@ export class UpdateTaskComponent implements OnInit {
                 },
                 (error : Error) => {
                   this.error();
-                  console.log(error);
                 });
   }
 

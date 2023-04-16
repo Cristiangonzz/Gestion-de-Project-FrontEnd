@@ -40,9 +40,14 @@ export class GetOneProjectComponent implements OnInit {
 
 //Ahora este id es el que tengo enviar al servicio para traer el project 
   getOneproject(id : string):void{
-    this.factory.getProjectUseCaseProvider.useFactory(this.projectService).execute(id).subscribe(
-      (data: IProjectDomainModel) => {this.project = data},
-    )
+    this
+      .factory
+        .getProjectUseCaseProvider
+          .useFactory(this.projectService)
+            .execute(id)
+            .subscribe(
+              (data: IProjectDomainModel) => {this.project = data},
+            )
   }
 
   

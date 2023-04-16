@@ -1,9 +1,6 @@
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { TaskService } from 'src/app/domain/services/task/task.service';
-import { ITaskDomainModel } from 'src/app/domain/interfaces/task/task.entity.domain';
-import { IUpdateTaskModel } from 'src/app/domain/interfaces/task/update-task.interface.domain';
 import { TeamService } from 'src/app/domain/services/team/team.service';
 import { ITeamDomainModel } from 'src/app/domain/interfaces/team/team.interface.domain';
 import { IUpdateTeamModel } from 'src/app/domain/interfaces/team/update-team.interface.domain';

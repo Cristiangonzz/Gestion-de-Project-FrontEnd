@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RoutingProjectModule } from './routing-project.module';
 import { CreateProjectComponent } from './create/create-project.component';
 import { GetOneProjectComponent } from './getOneBy/get-one-project.component';
-import { ListAllProjectComponent } from './list/list-all-project.component';
 import { UpdateProjectComponent } from './update/update-project.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,7 +17,6 @@ import { DataModule } from 'src/app/data/data.module';
 
     CreateProjectComponent,
     GetOneProjectComponent,
-    ListAllProjectComponent,
     UpdateProjectComponent,
     
   ],
@@ -36,7 +34,6 @@ import { DataModule } from 'src/app/data/data.module';
 
     CreateProjectComponent,
     GetOneProjectComponent,
-    ListAllProjectComponent,
     UpdateProjectComponent,
 
   ]

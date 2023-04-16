@@ -10,7 +10,6 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-update',
-  providers : [UpdateCollaborationUseCase],
   templateUrl: './update-collaboration.component.html',
   styleUrls: ['./update-collaboration.component.css']
 })
@@ -82,7 +81,6 @@ export class UpdateCollaborationComponent implements OnInit {
                 this.router.navigate([`sign-in`]);
               },
               (error) => {
-                console.log(error);
                 this.error();
               });
    }

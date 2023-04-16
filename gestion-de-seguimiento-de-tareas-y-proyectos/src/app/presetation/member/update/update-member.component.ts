@@ -4,6 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { UpdateMemberUseCase } from 'src/app/application/usecases/member/update-member.usecase';
 import { useCaseProviders } from 'src/app/data/factory';
 import { IMemberDomainModel } from 'src/app/domain/interfaces/member/member.interface.domain';
+import { IRegisterMemberDomainModel } from 'src/app/domain/interfaces/member/register-member.interface.domain';
 import { IUpdateMemberModel } from 'src/app/domain/interfaces/member/update-member.interface.domain';
 import { MemberService } from 'src/app/domain/services/member/member.service';
 import Swal from 'sweetalert2';
@@ -28,6 +29,14 @@ export class UpdateMemberComponent  implements OnInit {
     member : IUpdateMemberModel = 
     {  
       _id: "",
+      name: "",
+      document: "",
+      salary: 0,
+      role: "",
+      email:"",
+      password:"",
+    }
+    memberForm : IRegisterMemberDomainModel = {
       name: "",
       document: "",
       salary: 0,
@@ -65,7 +74,13 @@ export class UpdateMemberComponent  implements OnInit {
           .useFactory(this.memberService)
             .execute(this.member._id as string)
               .subscribe((data : IMemberDomainModel) => {
-                this.FormUpdate.patchValue(data);
+                this.memberForm.name = data.name;
+                this.memberForm.document = data.document;
+                this.memberForm.salary = data.salary;
+                this.memberForm.role = data.role;
+                this.memberForm.email = data.email;
+                this.memberForm.password = data.password;
+                this.FormUpdate.patchValue(this.memberForm);
               });
   }
 

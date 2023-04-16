@@ -29,7 +29,7 @@ export class UpdateProjectComponent  implements OnInit {
   constructor(
     private readonly projectService: ProjectService,
     private readonly route : ActivatedRoute,
-    private router : Router,
+    private readonly router : Router,
     ){}
 
   ngOnInit():void {
@@ -62,11 +62,9 @@ export class UpdateProjectComponent  implements OnInit {
                 (response:IProjectDomainModel) => {
                   this.succes();
                   this.router.navigate([`project/listOne/${this.project._id}`]);
-                  console.log(response);
                 },
                 (error : Error) => {
                   this.error();
-                  console.log(error);
                 });
   }
 

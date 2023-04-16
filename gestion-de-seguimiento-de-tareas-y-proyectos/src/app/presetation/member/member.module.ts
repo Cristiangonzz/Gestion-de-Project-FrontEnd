@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RoutingMemberModule } from './routing-member.module';
-import { ListAllMemberComponent } from './list/list-all-member.component';
 import { UpdateMemberComponent } from './update/update-member.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -15,7 +14,7 @@ import { DataModule } from 'src/app/data/data.module';
 @NgModule({
   declarations: [
     
-    ListAllMemberComponent,
+  
     UpdateMemberComponent,
     GetOneMemberComponent
 
@@ -36,7 +35,6 @@ import { DataModule } from 'src/app/data/data.module';
   exports: [
     
     GetOneMemberComponent,
-    ListAllMemberComponent,
     UpdateMemberComponent,
   ],
 })

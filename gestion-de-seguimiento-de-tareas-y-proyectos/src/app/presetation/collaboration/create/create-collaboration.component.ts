@@ -49,13 +49,12 @@ export class CreateCollaborationComponent implements OnInit {
           .useFactory(this.service)
             .execute(this.collaboration)
               .subscribe(
-                (response) => {
+                (response:ICollaborationDomainModel) => {
                   console.log(response);
                   this.succes();
                   this.router.navigate([`sign-in`]);
                 },
-                (error) => {
-                  console.log(error);
+                (error:Error) => {
                   this.error();
                 });
    }

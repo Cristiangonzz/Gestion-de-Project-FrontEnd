@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RoutingTaskModule } from './routing-task.module';
 import { CreateTaskComponent } from './create/create-task.component';
 import { ListOneTaskComponent } from './getOneBy/list-one-task.component';
-import { ListAllTaskComponent } from './list/list-all-task.component';
 import { UpdateTaskComponent } from './update/update-task.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,7 +17,6 @@ import { DataModule } from 'src/app/data/data.module';
 
     CreateTaskComponent,
     ListOneTaskComponent,
-    ListAllTaskComponent,
     UpdateTaskComponent,
   ],
   imports: [
@@ -30,11 +28,11 @@ import { DataModule } from 'src/app/data/data.module';
     HttpClientModule,
     RoutingTaskModule,
     SharedModule,
+    
   ],
   exports: [
     CreateTaskComponent,
     ListOneTaskComponent,
-    ListAllTaskComponent,
     UpdateTaskComponent,
   ]
 })

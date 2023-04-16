@@ -457,7 +457,7 @@ const SignUpFireBaseUseCaseFactory =
   return factory;
 })();
 
-const SignInGoogleUseCaseFactory =
+const SignInGoogleUseCaseFactory = 
 (() => {
   let instance: SignInGoogleUseCase;
 
