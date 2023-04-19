@@ -1,28 +1,31 @@
-import { BehaviorSubject, Observable, asyncScheduler, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, asyncScheduler, switchMap } from 'rxjs';
 import { ICollaborationDomainModel } from 'src/app/domain/interfaces/collaboration/collaboration.interface.domain';
 import { CollaborationService } from 'src/app/domain/services/collaboration/collaboration.service';
 import { UseCase } from 'src/app/domain/use-case';
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 
 @Injectable({
     providedIn: 'root'
 })
-export class FindAllCollaborationUseCase{
-    
+export class FindAllCollaborationUseCase {    
     private status : ICollaborationDomainModel[] =  [];
+
     public statusEmmit : BehaviorSubject<ICollaborationDomainModel[]>
      = new BehaviorSubject<ICollaborationDomainModel[]>(this.status);
 
     constructor(private collaborationService: CollaborationService) { }
+  
 
     execute = () =>{
+        
         if(this.statusEmmit.observed && !this.statusEmmit.closed){
-            this.collaborationService.findAllCollaboration()
+           this.collaborationService.findAllCollaboration()
                 .subscribe({
                     next: (value:ICollaborationDomainModel[] ) => { this.status = value; },
                     complete: () => 
                     {
                         this.statusEmmit.next(this.status);
+                        console.log("complete");
                         asyncScheduler.schedule(this.execute, 1000); 
                     }
                 });

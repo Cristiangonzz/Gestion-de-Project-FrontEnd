@@ -9,7 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { DataModule } from 'src/app/data/data.module';
-import { FindAllCollaborationComponent } from './findall/findall.component';
+import { FindAllCollaborationComponent } from './findall/findall-collaboration.component';
 
 
 

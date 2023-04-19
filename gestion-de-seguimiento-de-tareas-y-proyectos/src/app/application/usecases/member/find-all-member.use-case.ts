@@ -1,5 +1,4 @@
-import { Observable } from 'rxjs';
-import { UseCase } from 'src/app/domain/use-case';
+import { BehaviorSubject, Observable, asyncScheduler } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { MemberService } from 'src/app/domain/services/member/member.service';
 import { IMemberDomainModel } from 'src/app/domain/interfaces/member/member.interface.domain';
@@ -7,11 +6,31 @@ import { IMemberDomainModel } from 'src/app/domain/interfaces/member/member.inte
 @Injectable({
     providedIn: 'root'
 })
-export class FindAllMemberUseCase implements UseCase<undefined, IMemberDomainModel[]> {
+export class FindAllMemberUseCase  {
 
     constructor(private memberService: MemberService) { }
 
-    execute(): Observable<IMemberDomainModel[]> {
-        return this.memberService.findAllMember();
+    private status : IMemberDomainModel[] =  [];
+    
+    public statusEmmit : BehaviorSubject<IMemberDomainModel[]>
+    = new BehaviorSubject<IMemberDomainModel[]>(this.status);
+    
+    execute = () =>{
+        
+        if(this.statusEmmit.observed && !this.statusEmmit.closed){
+        this.memberService.findAllMember()
+                .subscribe({
+                    next: (value:IMemberDomainModel[] ) => { this.status = value; },
+                    complete: () => 
+                    {
+                        this.statusEmmit.next(this.status);
+                        console.log("complete");
+                        asyncScheduler.schedule(this.execute, 1000); 
+                    }
+                });
+        } else {
+            asyncScheduler.schedule(this.execute, 100);
+        }   
+
     }
 }

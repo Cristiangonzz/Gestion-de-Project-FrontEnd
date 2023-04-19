@@ -1,0 +1,26 @@
+
+
+  <h1>Collaborations</h1>
+
+  <table class="listado">
+    <thead>
+      <tr>
+        <th scope="col">Comment </th>
+        <th scope="col">Notification</th>
+        <th scope="col">Progress</th>
+        <th scope="col">Performence</th>
+        <th colspan="2"><h1>Opciones</h1></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let e of entities">
+        <td>{{e.comment}}</td>
+        <td>{{e.notification}}</td>
+        <td>{{e.progress}}</td>
+        <td>{{e.performence}}</td>
+        <td class="icono"><a href="#"><span class="fa fa-pencil-square-o fa-2x"></span></a></td>	
+        <td class="icono"><a href="#"><span class="fa fa-trash fa-2x"></span></a></td>	
+      </tr>
+
+    </tbody>
+  </table>

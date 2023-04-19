@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FindallComponent } from './findall.component';
+import { FindallComponent } from './findall-project.component';
 
 describe('FindallComponent', () => {
   let component: FindallComponent;

@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-findAllProject',
-  templateUrl: './findall.component.html',
-  styleUrls: ['./findall.component.css']
+  templateUrl: './findall-project.component.html',
+  styleUrls: ['./findall-project.component.css']
 })
 export class FindAllProjectComponent {
 

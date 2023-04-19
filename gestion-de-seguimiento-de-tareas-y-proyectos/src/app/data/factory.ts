@@ -622,17 +622,17 @@ export const useCaseProviders = {
         deps: [MemberService],
     },
     aggregateMemberOfTeamUseCaseProvider : {
-        provide: UpdateTeamUseCase,
+        provide: AggregateMemberOfTeamUseCase,
         useFactory: AggregateMemberOfTeamUseCaseFactory,
         deps: [TeamService],
     },
     aggregateCollaborationOfTeamUseCaseProvider : {
-        provide: UpdateTeamUseCase,
+        provide: AggregateCollaborationOfTeamUseCase,
         useFactory: AggregateCollaborationOfTeamUseCaseFactory,
         deps: [TeamService],
     },
     aggregateTaskOfTeamUseCaseProvider : {
-        provide: UpdateTeamUseCase,
+        provide: AggregateTaskOfTeamUseCase,
         useFactory: AggregateTaskOfTeamUseCaseFactory,
         deps: [TeamService],
     },

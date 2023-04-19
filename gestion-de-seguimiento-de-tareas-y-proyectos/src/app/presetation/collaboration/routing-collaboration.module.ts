@@ -4,7 +4,7 @@ import { CreateCollaborationComponent } from './create/create-collaboration.comp
 import { GetOneCollaborationComponent } from './getOneBy/get-one-collaboration.component';
 import { UpdateCollaborationComponent } from './update/update-collaboration.component';
 import { PermissionGuard } from 'src/app/guards/permission.guard';
-import { FindAllCollaborationComponent } from './findall/findall.component';
+import { FindAllCollaborationComponent } from './findall/findall-collaboration.component';
 
 const routes: Routes = [
   {

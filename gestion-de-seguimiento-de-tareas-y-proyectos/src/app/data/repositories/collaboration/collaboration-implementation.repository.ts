@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, of, switchMap } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CollaborationService } from 'src/app/domain/services/collaboration/collaboration.service';
