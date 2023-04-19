@@ -76,7 +76,7 @@ export class GetOneCollaborationComponent implements OnInit {
                           'Your file has been deleted.',
                           'success'
                         )
-                        this.router.navigate([`collaboration/register`]);
+                        this.router.navigate([`collaboration/create`]);
                         console.log(response);
                       },
                       (error:Error) => {

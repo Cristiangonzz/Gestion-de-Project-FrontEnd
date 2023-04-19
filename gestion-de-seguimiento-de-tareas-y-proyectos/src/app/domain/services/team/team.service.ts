@@ -15,6 +15,8 @@ export abstract class TeamService {
     abstract deleteTeam(data: string): Observable<boolean>;
     
     abstract getTeam(data :string): Observable<ITeamDomainModel>;
+
+    abstract findAllTeam(): Observable<ITeamDomainModel[]>;
     
     abstract register(params: ITeamDomainModel ): Observable<ITeamDomainModel>;
     

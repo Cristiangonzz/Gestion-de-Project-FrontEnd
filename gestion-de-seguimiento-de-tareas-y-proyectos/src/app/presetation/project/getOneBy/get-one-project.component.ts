@@ -80,7 +80,7 @@ export class GetOneProjectComponent implements OnInit {
                           'Your file has been deleted.',
                           'success'
                         )
-                        this.router.navigate([`project/register`]);
+                        this.router.navigate([`home/home`]);
                         console.log(response);
                       },
                       (error:Error) => {

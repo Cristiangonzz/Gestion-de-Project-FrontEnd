@@ -9,6 +9,7 @@ import { IUpdateCollaborationModel } from 'src/app/domain/interfaces/collaborati
     providedIn: 'root',
 })
 export class CollaborationImplementationRepository extends CollaborationService {
+   
   
     URL = "https://gestion-de-project-backend-production.up.railway.app";
 
@@ -36,6 +37,12 @@ export class CollaborationImplementationRepository extends CollaborationService 
     getCollaboration(data: string): Observable<ICollaborationDomainModel> {
         return this.http.get<ICollaborationDomainModel>(`${this.URL}/collaboration/get/${data}`,this.httpOptions);
     }
+
+    findAllCollaboration(): Observable<ICollaborationDomainModel[]> {
+        return this.http.get<ICollaborationDomainModel[]>(`${this.URL}/collaboration/findAll`,this.httpOptions);
+
+    }
+
     updateCollaboration(entity: IUpdateCollaborationModel): Observable<ICollaborationDomainModel> {
         return this.http.put<ICollaborationDomainModel>(`${this.URL}/collaboration/update/${entity._id}`,entity,this.httpOptions);
     }

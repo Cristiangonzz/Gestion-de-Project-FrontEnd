@@ -53,7 +53,7 @@ export class CreateTaskComponent implements OnInit {
                 (response) => {
                   console.log(response);
                   this.succes();
-                  this.router.navigate([`sign-in`]);
+                  this.router.navigate([`home/home`]);
                 },
                 (error) => {
                   console.log(error);

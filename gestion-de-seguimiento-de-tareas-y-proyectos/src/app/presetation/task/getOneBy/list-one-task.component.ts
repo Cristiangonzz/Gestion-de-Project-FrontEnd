@@ -74,7 +74,7 @@ export class ListOneTaskComponent implements OnInit {
                           'Your file has been deleted.',
                           'success'
                         )
-                        this.router.navigate([`task/register`]);
+                        this.router.navigate([`home/home`]);
                         console.log(response);
                       },
                       (error:Error) => {

@@ -10,6 +10,8 @@ export abstract class CollaborationService {
     
     abstract getCollaboration(data :string): Observable<ICollaborationDomainModel>;
     
+    abstract findAllCollaboration(): Observable<ICollaborationDomainModel[]>;
+    
     abstract register(params: ICollaborationDomainModel ): Observable<ICollaborationDomainModel>;
     
     abstract updateCollaboration(entity: IUpdateCollaborationModel): Observable<ICollaborationDomainModel>;

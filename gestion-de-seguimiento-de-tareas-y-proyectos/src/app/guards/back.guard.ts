@@ -10,8 +10,9 @@ export class BackGuard implements CanActivate {
   provider = useCaseProviders;
   constructor(
     private readonly router: Router,
+
   ) { }
-  canActivate(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+  canActivate(): Observable<boolean>  {
     
      return this.provider.hasUserUseCaseProvider.useFactory().execute()
      .pipe(map((status: boolean) => {

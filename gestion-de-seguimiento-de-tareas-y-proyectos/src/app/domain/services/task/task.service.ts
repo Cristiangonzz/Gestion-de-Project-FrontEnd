@@ -12,6 +12,8 @@ export abstract class TaskService {
     abstract deleteTask(data: string): Observable<boolean>;
 
     abstract getTask(data :string): Observable<ITaskDomainModel>;
+
+    abstract findAllTask(): Observable<ITaskDomainModel[]>;
     
     abstract register(params: ITaskDomainModel ): Observable<ITaskDomainModel>;
     

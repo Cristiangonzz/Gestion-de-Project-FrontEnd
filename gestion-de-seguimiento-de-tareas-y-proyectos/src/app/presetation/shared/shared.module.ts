@@ -6,6 +6,7 @@ import { InputComponent } from './input/input.component';
 import { DataModule } from 'src/app/data/data.module';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { MaterialModule } from './material/material.module';
+import { FindallComponent } from './findall/findall.component';
 
 
 
@@ -13,7 +14,8 @@ import { MaterialModule } from './material/material.module';
   declarations: [
     SearchComponent,
     InputComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    FindallComponent
   ],
   imports: [
     CommonModule,

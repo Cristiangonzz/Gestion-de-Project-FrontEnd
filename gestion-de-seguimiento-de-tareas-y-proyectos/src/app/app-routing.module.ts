@@ -11,18 +11,19 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'login',
+    canActivate: [ BackGuard],
+    loadChildren: () => import('./presetation/login/login.module')
+    .then( m => m.LoginModule )
+  },
+  {
      path: 'home',
      canActivate: [ PermissionGuard ],
      loadChildren: () => import('./presetation/home/home.module')
      .then( m => m.HomeModule )
   },
 
-  {
-    path: 'login',
-    canActivate: [ BackGuard],
-    loadChildren: () => import('./presetation/login/login.module')
-    .then( m => m.LoginModule )
-  },
+
 
   {
     path: 'collaboration',
@@ -58,6 +59,7 @@ const routes: Routes = [
   {
   path:   '**' ,
   redirectTo: 'login',
+  pathMatch: 'full'
   },
 
   ];

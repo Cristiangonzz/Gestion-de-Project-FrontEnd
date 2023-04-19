@@ -66,13 +66,12 @@ factory = useCaseProviders;
                   .execute(this.memberId)
                     .subscribe(
                       (response) => {
+                       // this.router.navigate([`home/home`]);
                         Swal.fire(
                           'Deleted!',
                           'Your file has been deleted.',
                           'success'
-                        )
-                        this.router.navigate([`member/register`]);
-                        console.log(response);
+                          )
                       },
                       (error) => {
                         Swal.fire({
@@ -82,11 +81,12 @@ factory = useCaseProviders;
                         showConfirmButton: false,
                         timer: 2500
                       })
-                        console.log(error);
                       }
                     );
+                    this.router.navigate([`home/home`]);
       }
     })
+   
     
     
   }

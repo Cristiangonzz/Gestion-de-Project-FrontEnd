@@ -9,6 +9,7 @@ import { IUpdateTaskModel } from 'src/app/domain/interfaces/task/update-task.int
     providedIn: 'root',
 })
 export class TaskImplementationRepository extends TaskService {
+    
   
     URL = "https://gestion-de-project-backend-production.up.railway.app";
 
@@ -37,6 +38,11 @@ export class TaskImplementationRepository extends TaskService {
     getTask(data: string): Observable<ITaskDomainModel> {
         return this.http.get<ITaskDomainModel>(`${this.URL}/task/get/${data}`,this.httpOptions);
     }
+
+    findAllTask(): Observable<ITaskDomainModel[]> {
+        return this.http.get<ITaskDomainModel[]>(`${this.URL}/task/findAll`,this.httpOptions);
+    }
+
     updateTask(entity: IUpdateTaskModel): Observable<ITaskDomainModel> {
         return this.http.put<ITaskDomainModel>(`${this.URL}/task/update/${entity._id}`,entity,this.httpOptions);
     }

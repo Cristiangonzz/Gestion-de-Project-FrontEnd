@@ -9,6 +9,7 @@ import { IUpdateProjectModel } from 'src/app/domain/interfaces/proyect/update-pr
     providedIn: 'root',
 })
 export class ProjectImplementationRepository extends ProjectService {
+    
   
     URL = "https://gestion-de-project-backend-production.up.railway.app";
 
@@ -35,6 +36,10 @@ export class ProjectImplementationRepository extends ProjectService {
     }
     getProject(data: string): Observable<IProjectDomainModel> {
         return this.http.get<IProjectDomainModel>(`${this.URL}/project/get/${data}`,this.httpOptions);
+    }
+
+    findAllProject(): Observable<IProjectDomainModel[]> {
+        return this.http.get<IProjectDomainModel[]>(`${this.URL}/project/findAll`,this.httpOptions);
     }
     updateProject(entity: IUpdateProjectModel): Observable<IProjectDomainModel> {
         return this.http.put<IProjectDomainModel>(`${this.URL}/project/update/${entity._id}`,entity,this.httpOptions);

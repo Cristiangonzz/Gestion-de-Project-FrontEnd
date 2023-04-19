@@ -51,6 +51,9 @@ export class ToolbarComponent  implements  OnInit{
   btnCollaboration(){
     this.router.navigate(['collaboration/create'])
   }
+  btnFindAllCollaboration(){
+    this.router.navigate(['collaboration/listAll']);
+  }
   btnProject(){
     this.router.navigate(['project/create'])
   }

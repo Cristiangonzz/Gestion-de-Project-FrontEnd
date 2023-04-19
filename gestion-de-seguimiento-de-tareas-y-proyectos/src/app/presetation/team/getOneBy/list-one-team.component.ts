@@ -60,25 +60,29 @@ export class ListOneTeamComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
 
-          this.factory.deleteTeamUseCaseProvider.useFactory(this.serviceTeam).execute(this.teamId).subscribe(
-            (response) => {
-              Swal.fire(
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
-              )
-              this.router.navigate([`team/register`]);
-              console.log(response);
-            },
-            (error:Error) => {
-              Swal.fire({
-              position: 'top-end',
-              icon: 'error',
-              title: 'not Delete',
-              showConfirmButton: false,
-              timer: 2500
-            })
-              console.log(error);
+          this
+            .factory
+              .deleteTeamUseCaseProvider
+                .useFactory(this.serviceTeam)
+                  .execute(this.teamId)
+                    .subscribe(
+                      (response) => {
+                        Swal.fire(
+                          'Deleted!',
+                          'Your file has been deleted.',
+                          'success'
+                        )
+                        this.router.navigate([`team/register`]);
+                        console.log(response);
+                      },
+                      (error:Error) => {
+                        Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'not Delete',
+                        showConfirmButton: false,
+                        timer: 2500
+                      })
             }
           );
       }

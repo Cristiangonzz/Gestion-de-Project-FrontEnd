@@ -4,12 +4,12 @@ import { RoutingCollaborationModule } from './routing-collaboration.module';
 import { CreateCollaborationComponent } from './create/create-collaboration.component';
 import { UpdateCollaborationComponent } from './update/update-collaboration.component';
 import { GetOneCollaborationComponent } from './getOneBy/get-one-collaboration.component';
-import { ListAllCollaborationComponent } from './list/list-collaboration.component';
 import { SharedModule } from '../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { DataModule } from 'src/app/data/data.module';
+import { FindAllCollaborationComponent } from './findall/findall.component';
 
 
 
@@ -18,7 +18,8 @@ import { DataModule } from 'src/app/data/data.module';
   CreateCollaborationComponent,
   UpdateCollaborationComponent,
   GetOneCollaborationComponent,
-  ListAllCollaborationComponent,   
+  FindAllCollaborationComponent,
+
 
   ],
   imports: [
@@ -38,7 +39,8 @@ import { DataModule } from 'src/app/data/data.module';
     CreateCollaborationComponent,
     UpdateCollaborationComponent,
     GetOneCollaborationComponent,
-    ListAllCollaborationComponent,
+    FindAllCollaborationComponent,
+
   ]
 })
 export class CollaborationModule { }

@@ -9,7 +9,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 import { DataModule } from 'src/app/data/data.module';
 import { GetMemberUseCase } from 'src/app/application/usecases/member/get-member.usecase';
-import { IMemberDomainModel } from 'src/app/domain/interfaces/member/member.interface.domain';
 import { UpdateMemberUseCase } from 'src/app/application/usecases/member/update-member.usecase';
 import Swal from 'sweetalert2';
 
@@ -20,6 +19,7 @@ describe('UpdateMemberComponent', () => {
     let useCaseGet: jasmine.SpyObj<GetMemberUseCase>;
     let router: Router;
     let routerActivated: ActivatedRoute;
+    
     const entityModel : IUpdateMemberModel = {
         _id:"123",
         name: "",
@@ -90,7 +90,7 @@ describe('UpdateMemberComponent', () => {
       
         useCase.execute.and.returnValue(of(entityModel));
        
-      const swalSpy = spyOn(Swal, 'fire');
+        const swalSpy = spyOn(Swal, 'fire');
         const routerSpy = spyOn(router, 'navigate');
   
         component.FormUpdate.setValue(entityUpdate);
@@ -108,7 +108,7 @@ describe('UpdateMemberComponent', () => {
             spyOn(useCase, 'execute').and.returnValue(throwError(mockError));
             const consoleSpy = spyOn(console, 'log');
         
-            component.FormUpdate.setValue(entityModel);
+            component.FormUpdate.setValue(entityUpdate);
             component.send();
         
             expect(consoleSpy).toHaveBeenCalledWith(mockError);
@@ -121,7 +121,7 @@ describe('UpdateMemberComponent', () => {
         
         component.upDateFromApi();
         expect(useCaseGet).toHaveBeenCalledWith(entityModel._id);
-        expect(component.FormUpdate.value).toEqual(entityModel);
+        expect(component.FormUpdate.value).toEqual(entityUpdate);
       });
     });
   });

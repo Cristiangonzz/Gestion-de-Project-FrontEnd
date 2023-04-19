@@ -93,9 +93,9 @@ describe('UpdateCollaborationComponent', () => {
         component.FormUpdate.setValue(entityModel);
         component.send();
   
-        expect(useCase.execute).toHaveBeenCalled();
+        expect(useCase.execute).toHaveBeenCalledWith(entityUpdate);
         expect(routerSpy).toHaveBeenCalled();
-        expect(swalSpy).toHaveBeenCalledWith();
+        expect(swalSpy).toHaveBeenCalled();
 
         });
   

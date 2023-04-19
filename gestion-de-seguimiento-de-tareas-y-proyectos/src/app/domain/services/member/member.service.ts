@@ -20,5 +20,7 @@ export abstract class MemberService {
 
     abstract getEmailMember(data :string): Observable<IMemberDomainModel>;
 
+    abstract findAllMember(): Observable<IMemberDomainModel[]>;
+
     abstract updateMember(entity: IUpdateMemberModel): Observable<IMemberDomainModel>;
 }

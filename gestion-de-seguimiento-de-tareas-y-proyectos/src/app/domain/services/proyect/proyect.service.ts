@@ -12,6 +12,8 @@ export abstract class ProjectService {
     abstract deleteProject(data: string): Observable<boolean>;
     
     abstract getProject(data :string): Observable<IProjectDomainModel>;
+
+    abstract findAllProject(): Observable<IProjectDomainModel[]>;
     
     abstract register(params: IProjectDomainModel ): Observable<IProjectDomainModel>;
 

@@ -66,7 +66,9 @@ export class AggregateComponent implements OnInit{
               .subscribe(
                 (data :ITeamDomainModel ) => {
                   this.succes();
-                this.ngOnInit();
+                  this.ngOnInit();
+                  this.router.navigate([`home/home`]);
+                
                 },
                 (error:Error) => {
                 this.error();
@@ -87,6 +89,9 @@ export class AggregateComponent implements OnInit{
               .subscribe(
                 (data) => {
                   this.succes();
+                  this.ngOnInit();
+                  this.router.navigate([`home/home`]);
+                  
                 },
                 (error) => {
                  this.error();
@@ -107,13 +112,16 @@ export class AggregateComponent implements OnInit{
                 .subscribe(
                   (data) => {
                     this.succes();
+                    this.ngOnInit();
+                    this.router.navigate([`home/home`]); 
+                    
                   },
                   (error) => {
                    this.error();
                   }
                 );
     }
-    this.router.navigate([`team/listOne/${this.teamId}`]); 
+    
   }
 
   succes(){

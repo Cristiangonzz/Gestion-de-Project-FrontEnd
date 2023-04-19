@@ -12,6 +12,7 @@ import { IAgregateTaskOfTeamModel } from 'src/app/domain/interfaces/task/agregat
     providedIn: 'root',
 })
 export class TeamImplementationRepository extends TeamService {
+    
    
     
   
@@ -41,6 +42,11 @@ export class TeamImplementationRepository extends TeamService {
     getTeam(data: string): Observable<ITeamDomainModel> {
         return this.http.get<ITeamDomainModel>(`${this.URL}/team/get/${data}`,this.httpOptions);
     }
+
+    findAllTeam(): Observable<ITeamDomainModel[]> {
+        return this.http.get<ITeamDomainModel[]>(`${this.URL}/team/findAll`,this.httpOptions);
+    }
+
     updateTeam(entity: IUpdateTeamModel): Observable<ITeamDomainModel> {
         return this.http.put<ITeamDomainModel>(`${this.URL}/team/update/${entity._id}`,entity,this.httpOptions);
     }

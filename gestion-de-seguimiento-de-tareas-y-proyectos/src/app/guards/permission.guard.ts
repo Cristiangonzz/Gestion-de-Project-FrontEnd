@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {  CanActivate, Router, UrlTree } from '@angular/router';
 import { Observable, map, of, switchMap, tap } from 'rxjs';
-import { HasUserUseCase } from '../application/usecases/login-fire-base/has-user.use-case';
 import { useCaseProviders } from '../data/factory';
+import { HasUserUseCase } from '../application/usecases/login-fire-base/has-user.use-case';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +12,16 @@ export class PermissionGuard implements CanActivate {
   constructor(
 
     private readonly router: Router,
-    private readonly hasUserUseCase: HasUserUseCase,
+    private readonly user: HasUserUseCase,
+
   ) { }
-  canActivate(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+  canActivate(): Observable<boolean>{
     
       return this
                .provider
-                 .hasUserUseCaseProvider
-                   .useFactory()
-                     .execute()
+                .hasUserUseCaseProvider
+                  .useFactory()
+                    .execute()
                        .pipe(map((status: boolean) => {
                          if (status) {
                            return true;
@@ -35,9 +36,3 @@ export class PermissionGuard implements CanActivate {
   }
   
 }
- //  if(this.provider.hasUserUseCaseProvider.useFactory().execute()){
-    //    return true;
-    //  }
-
-    //  this.router.navigate([`login/sign-in`]);
-    //  return false;

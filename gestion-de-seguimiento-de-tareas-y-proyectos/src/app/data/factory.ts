@@ -22,7 +22,6 @@ import { RegisterTeamUseCase } from 'src/app/application/usecases/team/register-
 import { UpdateTeamUseCase } from 'src/app/application/usecases/team/update-team.usecase';
 import { TeamService } from 'src/app/domain/services/team/team.service';
 import { AggregateTaskOfTeamUseCase } from 'src/app/application/usecases/team/aggregate-task-team.usecase';
-import { AggregateCollaborationOfTeamUseCase } from 'src/app/application/usecases/team/aggregate-collaboration-team.usecase';
 import { AggregateMemberOfTeamUseCase } from 'src/app/application/usecases/team/aggregate-member-team.usecase';
 import { MemberService } from '../domain/services/member/member.service';
 import { SingInMemberUseCase } from '../application/usecases/member/sing-in-member.usecase';
@@ -34,6 +33,12 @@ import { SignInFireBaseUseCase } from '../application/usecases/login-fire-base/s
 import { Auth } from '@angular/fire/auth';
 import { SignUpFireBaseUseCase } from '../application/usecases/login-fire-base/sign-up-fire-base.use-case';
 import { SignInGoogleUseCase } from '../application/usecases/login-fire-base/sign-in-google.use-case';
+import { FindAllCollaborationUseCase } from '../application/usecases/collaboration/find-all-collaboration.use-case';
+import { FindAllProjectUseCase } from '../application/usecases/proyect/find-all-project.use-case';
+import { FindAllTaskUseCase } from '../application/usecases/task/find-all-task.use-case';
+import { FindAllTeamUseCase } from '../application/usecases/team/find-all-team.use-case';
+import { FindAllMemberUseCase } from '../application/usecases/member/find-all-member.use-case';
+import { AggregateCollaborationOfTeamUseCase } from '../application/usecases/team/aggregate-collaboration-team.usecase';
 
 //collaborationconst 
 const RegisterCollaborationUseCaseFactory = 
@@ -58,6 +63,20 @@ const GetCollaborationUseCaseFactory =
     const factory = (collaborationService: CollaborationService): GetCollaborationUseCase => {
       if (!instance) {
         instance = new GetCollaborationUseCase(collaborationService);
+      }
+  
+      return instance;
+    };
+  
+    return factory;
+})();
+const FindAllCollaborationUseCaseFactory = 
+(() => {
+    let instance: FindAllCollaborationUseCase;
+  
+    const factory = (collaborationService: CollaborationService): FindAllCollaborationUseCase => {
+      if (!instance) {
+        instance = new FindAllCollaborationUseCase(collaborationService);
       }
   
       return instance;
@@ -122,8 +141,35 @@ const GetProjectUseCaseFactory =
   
     return factory;
 })();
-const UpdateProjectUseCaseFactory = (projectService: ProjectService) => new UpdateProjectUseCase(projectService);
 
+const FindAllProjectUseCaseFactory = 
+(() => {
+    let instance: FindAllProjectUseCase;
+  
+    const factory = (projectService: ProjectService): FindAllProjectUseCase => {
+      if (!instance) {
+        instance = new FindAllProjectUseCase(projectService);
+      }
+  
+      return instance;
+    };
+  
+    return factory;
+})();
+const UpdateProjectUseCaseFactory =
+(() => {
+  let instance: UpdateProjectUseCase;
+
+  const factory = (projectService: ProjectService): UpdateProjectUseCase => {
+    if (!instance) {
+      instance = new UpdateProjectUseCase(projectService);
+    }
+
+    return instance;
+  };
+
+  return factory;
+})();
 const DeleteProjectUseCaseFactory = 
 (() => {
     let instance: DeleteProjectUseCase;
@@ -160,6 +206,21 @@ const GetTaskUseCaseFactory =
     const factory = (taskService: TaskService): GetTaskUseCase => {
       if (!instance) {
         instance = new GetTaskUseCase(taskService);
+      }
+  
+      return instance;
+    };
+  
+    return factory;
+})();
+
+const FindAllTaskUseCaseFactory = 
+(() => {
+    let instance: FindAllTaskUseCase;
+  
+    const factory = (taskService: TaskService): FindAllTaskUseCase => {
+      if (!instance) {
+        instance = new FindAllTaskUseCase(taskService);
       }
   
       return instance;
@@ -226,7 +287,20 @@ const GetTeamUseCaseFactory =
   
     return factory;
 })();
-
+const FindAllTeamUseCaseFactory = 
+(() => {
+    let instance: FindAllTeamUseCase;
+  
+    const factory = (teamService: TeamService): FindAllTeamUseCase => {
+      if (!instance) {
+        instance = new FindAllTeamUseCase(teamService);
+      }
+  
+      return instance;
+    };
+  
+    return factory;
+})();
 
 const UpdateTeamUseCaseFactory = 
 (() => {
@@ -277,13 +351,13 @@ const AggregateTaskOfTeamUseCaseFactory =
 
 
 
-const AggregateCollaborationOfTeamUseCaseFactory = (teamService: TeamService) => new AggregateCollaborationOfTeamUseCase(teamService);
+const AggregateCollaborationOfTeamUseCaseFactory =
 (() => {
-    let instance: AggregateMemberOfTeamUseCase;
+    let instance: AggregateCollaborationOfTeamUseCase;
   
-    const factory = (teamService: TeamService): AggregateMemberOfTeamUseCase => {
+    const factory = (teamService: TeamService): AggregateCollaborationOfTeamUseCase => {
       if (!instance) {
-        instance = new AggregateMemberOfTeamUseCase(teamService);
+        instance = new AggregateCollaborationOfTeamUseCase(teamService);
       }
   
       return instance;
@@ -330,6 +404,21 @@ const GetMemberUseCaseFactory =
     const factory = (memberService: MemberService): GetMemberUseCase => {
       if (!instance) {
         instance = new GetMemberUseCase(memberService);
+      }
+  
+      return instance;
+    };
+  
+    return factory;
+})();
+
+const FindAllMemberUseCaseFactory = 
+(() => {
+    let instance: FindAllMemberUseCase;
+  
+    const factory = (memberService: MemberService): FindAllMemberUseCase => {
+      if (!instance) {
+        instance = new FindAllMemberUseCase(memberService);
       }
   
       return instance;
@@ -503,12 +592,10 @@ export const useCaseProviders = {
         provide: HasUserTokenDecodeUseCase,
         useFactory: DecodeUseCaseFactorty,
     },
-
     hasUserUseCaseProvider : {
         provide: HasUserUseCase,
         useFactory: HasUserUseCaseFactory,
     },
-  
     deleteMembernUseCaseProvider : {
         provide: UpdateMemberUseCase,
         useFactory: DeleteMemberUseCaseFactory,
@@ -529,7 +616,6 @@ export const useCaseProviders = {
         useFactory: GetEmailMemberUseCaseFactory,
         deps: [MemberService],
     },
-
     signInMemberUseCaseProvider : {
         provide: SingInMemberUseCase,
         useFactory: SignInMemberUseCaseFactory,
@@ -625,10 +711,35 @@ export const useCaseProviders = {
         useFactory: GetCollaborationUseCaseFactory,
         deps: [CollaborationService],
     },
-    registerCollaborationUseCaseProvider : {
-        provide: RegisterCollaborationUseCase,
-        useFactory: RegisterCollaborationUseCaseFactory,
+    findAllCollaborationUseCaseProvider : {
+        provide: FindAllCollaborationUseCase,
+        useFactory: FindAllCollaborationUseCaseFactory,
         deps: [CollaborationService],
+    },
+    findAllMemberUseCaseProvider : {
+      provide: FindAllMemberUseCase,
+      useFactory: FindAllMemberUseCaseFactory,
+      deps: [MemberService],
+    },
+    findAllProjectUseCaseProvider : {
+      provide: FindAllProjectUseCase,
+      useFactory: FindAllProjectUseCaseFactory,
+      deps: [ProjectService],
+    },
+    findAllTaskUseCaseProvider : {
+    provide: FindAllTaskUseCase,
+    useFactory: FindAllTaskUseCaseFactory,
+    deps: [TaskService],
+    },
+    findAllTeamUseCaseProvider : {
+    provide: FindAllTeamUseCase,
+    useFactory: FindAllTeamUseCaseFactory,
+    deps: [TeamService],
+    },
+    registerCollaborationUseCaseProvider : {
+          provide: RegisterCollaborationUseCase,
+          useFactory: RegisterCollaborationUseCaseFactory,
+          deps: [CollaborationService],
     },
 }
 
